@@ -46,11 +46,14 @@ class Task(models.Model):
     taskTitle= models.CharField(max_length=500)
     assignments = models.ManyToManyField(User)
     subtasks = models.ManyToManyField(Task)
+    
     taskPriority = models.CharField(max_length=500)
     taskStatus=models.CharField(max_length=500)
+    
     taskDuedate = models.CharField(max_length=500)
     taskCompletiondate = models.CharField(max_length=500)
     taskDescription = models.CharField()
+    taskLocationDescription = models.CharField(max_length=500)
     
     creator = models.ForeignKey(User,related_name="taskCreator")
     creationTime  = models.DateTimeField(auto_now_add=True)

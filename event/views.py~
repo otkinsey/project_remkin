@@ -42,19 +42,6 @@ def mkevent(request):
     newevent.save()
     return HttpResponse('{"success": true, "id": ' + str(newevent.id) + '}',content_type="application/json")
 
-@csrf_exempt
-def mktask(request):
-    newtask=Task();
-    for field in request.POST:
-        setattr(newevent,field, request.POST[field])
-    user = authenticate(username='testuser', password='8jfkldsa8uew8')
-    
-    newtask.creator=user
-    
-    
-    newevent.save()
-    return HttpResponse('{"success": true, "id": ' + str(newevent.id) + '}',content_type="application/json")
-
 def newuser(request):
     user = User.objects.create_user('testuser', 'james.andrix+user@gmail.com', '8jfkldsa8uew8')
     return HttpResponse('{"success": true}',content_type="application/json")
