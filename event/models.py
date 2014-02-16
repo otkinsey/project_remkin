@@ -20,6 +20,20 @@ class Location(models.Model):
     def to_dict(self):
         return model_to_dict(self)
 
+class Task(models.Model):
+    taskTitle= models.CharField(max_length=500)
+    assignments = models.ManyToManyField(User)
+    subtasks = models.ManyToManyField("self", symmetrical=False)
+    taskPriority = models.CharField(max_length=500)
+    taskStatus=models.CharField(max_length=500)
+    taskDuedate = models.CharField(max_length=500)
+    taskCompletiondate = models.CharField(max_length=500)
+    taskDescription = models.CharField(max_length=5000)
+    creator = models.ForeignKey(User,related_name="taskCreator")
+    creationTime  = models.DateTimeField(auto_now_add=True)
+    def to_dict(self):
+        return model_to_dict(self)
+
 
 class Event(models.Model):
     eventName= models.CharField(max_length=500)
@@ -27,7 +41,7 @@ class Event(models.Model):
     eventAddress=models.CharField(max_length=500)
     
     eventDuration = models.CharField(max_length=500)
-    eventDescription = models.CharField()
+    eventDescription = models.CharField(max_length=5000)
     eventLocationDescription = models.CharField(max_length=500)
     longitude = models.FloatField()
     latitude = models.FloatField()
@@ -35,28 +49,12 @@ class Event(models.Model):
     creationTime  = models.DateTimeField(auto_now_add=True)
     eventComputedStartTime = models.DateTimeField(auto_now_add=True)
     eventComputedEndTime = models.DateTimeField(auto_now_add=True)
-    EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist")
+    EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist", blank=True)
     
     tasklist = models.ManyToManyField(Task)
     def to_dict(self):
         return model_to_dict(self)
-     #  return dict([(p, unicode(getattr(self, p))) for p in self.properties()])
        
-class Task(models.Model):
-    taskTitle= models.CharField(max_length=500)
-    assignments = models.ManyToManyField(User)
-    subtasks = models.ManyToManyField(Task)
-    taskPriority = models.CharField(max_length=500)
-    taskStatus=models.CharField(max_length=500)
-    taskDuedate = models.CharField(max_length=500)
-    taskCompletiondate = models.CharField(max_length=500)
-    taskDescription = models.CharField()
-    
-    creator = models.ForeignKey(User,related_name="taskCreator")
-    creationTime  = models.DateTimeField(auto_now_add=True)
-    def to_dict(self):
-        return model_to_dict(self)
-     #  return dict([(p, unicode(getattr(self, p))) for p in self.properties()])
     
             
 
