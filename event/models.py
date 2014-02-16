@@ -32,11 +32,28 @@ class Event(models.Model):
     
     creator = models.ForeignKey(User,related_name="eventCreator")
     creationTime  = models.DateTimeField(auto_now_add=True)
-    eventComputedStartTime = models.DateTimeField()
-    eventComputedEndTime = models.DateTimeField()
-    eventLocation = models.ForeignKey(Location)
+    eventComputedStartTime = models.DateTimeField(auto_now_add=True)
+    eventComputedEndTime = models.DateTimeField(auto_now_add=True)
+#    eventLocation = models.ForeignKey(Location)
     EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist")
     
+class Task(models.Model):
+    taskName= models.CharField(max_length=500)
+    eventStartTime = models.CharField(max_length=500)
+    eventAddress=models.CharField(max_length=500)
+    
+    eventDuration = models.CharField(max_length=500)
+    eventDescription = models.CharField(max_length=500)
+    eventLocationDescription = models.CharField(max_length=500)
+    
+    creator = models.ForeignKey(User,related_name="eventCreator")
+    creationTime  = models.DateTimeField(auto_now_add=True)
+    eventComputedStartTime = models.DateTimeField(auto_now_add=True)
+    eventComputedEndTime = models.DateTimeField(auto_now_add=True)
+#    eventLocation = models.ForeignKey(Location)
+    EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist")
+    
+
     def to_dict(self):
         return model_to_dict(self)
      #  return dict([(p, unicode(getattr(self, p))) for p in self.properties()])
