@@ -47,14 +47,12 @@ class Event(models.Model):
     latitude = models.FloatField()
     creator = models.ForeignKey(User,related_name="eventCreator")
     creationTime  = models.DateTimeField(auto_now_add=True)
-    eventComputedStartTime = models.DateTimeField(auto_now_add=True)
-    eventComputedEndTime = models.DateTimeField(auto_now_add=True)
+    eventComputedStartTime = models.DateTimeField()
+    eventComputedEndTime = models.DateTimeField()
     EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist", blank=True)
-    
     tasklist = models.ManyToManyField(Task)
     def to_dict(self):
         return model_to_dict(self)
-       
     
             
 

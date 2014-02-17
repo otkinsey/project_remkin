@@ -4,6 +4,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 from models import Event,Location,Task
 import json
+import datetime
+
+from dateutil import parser
+
 from django.db import models
 from django.forms.models import model_to_dict
 
@@ -11,6 +15,15 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate, login
 # Create your views here.
+
+class ComplexEncoder(json.JSONEncoder):
+    def default(self, obj):
+        try:
+            return super(ComplexEncoder, obj).default(obj)
+        except TypeError:
+            return str(obj)
+
+
 def home(request):
     return HttpResponse("Hello, handstack.")
 
@@ -26,7 +39,6 @@ def bigdump(request):
     
 
 
-
 def taskdump(request):
     data=dict()
     cdata=dict()
@@ -35,6 +47,43 @@ def taskdump(request):
     data["events"]=cdata
     data["success"]=True
     return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+def search(request):
+    data=dict()
+    cdata=dict()
+    
+    q=Event.objects
+    latDist=0.1
+    lonDist=0.1
+
+    if 'eventid' in request.GET:
+        q=q.filter(id=int(request.GET['eventid']) )
+
+    if 'latDist' in request.GET:
+        latDist=float(request.GET['latDist'])
+    if 'lonDist' in request.GET:
+        lonDist=float(request.GET['lonDist'])
+
+    if 'startafter' in request.GET:
+        startafter=request.GET['startafter']
+        q=q.filter(eventComputedStartTime__gt=parser.parse(startafter))
+
+    if 'startbefore' in request.GET:
+        startbefore=request.GET['startbefore']
+        q=q.filter(eventComputedStartTime__lt=parser.parse(startbefore))
+
+    if 'latitude' in request.GET:
+        lat=float(request.GET['latitude'])
+        q=q.filter(latitude__range=(lat-latDist, lat+latDist))
+    if 'longitude' in request.GET:
+        lon=float(request.GET['longitude'])
+        q=q.filter(longitude__range=(lon-lonDist, lon+lonDist))
+    for thing in q.all():
+        cdata[str(thing.id)]=thing.to_dict()
+    data["events"]=cdata
+    data["success"]=True
+    return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
 
 
@@ -46,13 +95,17 @@ def obliviate(request):
 @csrf_exempt
 def mkevent(request):
     newevent=Event();
+    newevent.latitude=0.0
+    newevent.longitude=0.0
+
     for field in request.POST:
         setattr(newevent,field, request.POST[field])
     user = authenticate(username='testuser', password='8jfkldsa8uew8')
     newevent.creator=user
+    newevent.eventComputedStartTime=parser.parse(newevent.eventStartTime)
+    newevent.eventComputedEndTime=newevent.eventComputedStartTime + datetime.timedelta(seconds=int(float(newevent.eventDuration)))
+
 #    newevent.EventRSVPS=[user]
-    newevent.latitude=0.0
-    newevent.longitude=0.0
     newevent.save()
     return HttpResponse('{"success": true, "id": ' + str(newevent.id) + '}',content_type="application/json")
 
