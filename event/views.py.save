@@ -21,7 +21,6 @@ class ComplexEncoder(json.JSONEncoder):
         except TypeError:
             return str(obj)
 
-
 def homeindex(request):
     return HttpResponse("Hello, handstack.")
 
@@ -160,13 +159,13 @@ def fakelogin(request):
 def newuser(request):
     email=request.POST[email]
     username=request.POST[password]
-
-    user = User.objects.create_user(email, email, '8jfkldsa8uew8')
+    user = User.objects.create_user(email, email, password)
     return HttpResponse('{"success": true}',content_type="application/json")
-
+    #return UID
 
 
 #Login Form
+
 
 #login Handler
 

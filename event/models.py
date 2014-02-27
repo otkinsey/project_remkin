@@ -53,6 +53,5 @@ class Event(models.Model):
     tasklist = models.ManyToManyField(Task)
     def to_dict(self):
         return model_to_dict(self)
-    
             
 
