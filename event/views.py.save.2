@@ -32,11 +32,15 @@ def bigdump(request):
     for thing in Event.objects.all():
         cdata[str(thing.id)]=thing.to_dict()
     data["events"]=cdata
+
+    cdata=dict()
+    for thing in Task.objects.all():
+        cdata[str(thing.id)]=thing.to_dict()
+    data["tasks"]=cdata
+
     data["success"]=True
     return HttpResponse(json.dumps(data),content_type="application/json")
     
-
-
 def taskdump(request):
     data=dict()
     cdata=dict()
@@ -119,16 +123,14 @@ def mkevent(request):
 
     for field in request.POST:
         setattr(newevent,field, request.POST[field])
-    if request.user.is_authenticated():
-        return HttpResponse('{"success": false }',content_type="application/json")
-    else:    
-        newevent.creator=request.user
-        newevent.eventComputedStartTime=parser.parse(newevent.eventStartTime)
-        newevent.eventComputedEndTime=newevent.eventComputedStartTime + datetime.timedelta(seconds=int(float(newevent.eventDuration)))
+    user = authenticate(username='testuser', password='8jfkldsa8uew8')
+    newevent.creator=user
+    newevent.eventComputedStartTime=parser.parse(newevent.eventStartTime)
+    newevent.eventComputedEndTime=newevent.eventComputedStartTime + datetime.timedelta(seconds=int(float(newevent.eventDuration)))
 
 #    newevent.EventRSVPS=[user]
-        newevent.save()
-        return HttpResponse('{"success": true, "id": ' + str(newevent.id) + '}',content_type="application/json")
+    newevent.save()
+    return HttpResponse('{"success": true, "id": ' + str(newevent.id) + '}',content_type="application/json")
 
 @csrf_exempt
 def mktask(request):
@@ -158,35 +160,17 @@ def fakelogin(request):
 
 #Registration Form
 
-#static
-
-#Registration name lookup
-
 #Registration Handler
-@csrf_exempt
-def userregister(request):
-    email=request.POST['email']
-    pword=request.POST['pword']
+def newuser(request):
+    email=request.POST[email]
+    username=request.POST[password]
 
-    user = User.objects.create_user(email, email, pword)
-    #test for already registered
-    user = authenticate(username=email, password=pword)
-    login(request, user)
-    
+    user = User.objects.create_user(email, email, '8jfkldsa8uew8')
     return HttpResponse('{"success": true}',content_type="application/json")
+
+
 
 #Login Form
 
-#static
-
-
 #login Handler
-@csrf_exempt
-def userlogin(request):
-    email=request.POST['email']
-    pword=request.POST['pword']
-    #test for already registered
-    user = authenticate(username=email, password=pword)
-    login(request, user)
-    return HttpResponse('{"success": true}',content_type="application/json")
 

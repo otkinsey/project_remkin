@@ -20,6 +20,8 @@ class Location(models.Model):
     def to_dict(self):
         return model_to_dict(self)
 
+
+
 class Task(models.Model):
     taskTitle= models.CharField(max_length=500)
     assignments = models.ManyToManyField(User)
@@ -53,5 +55,3 @@ class Event(models.Model):
     tasklist = models.ManyToManyField(Task)
     def to_dict(self):
         return model_to_dict(self)
-            
-
