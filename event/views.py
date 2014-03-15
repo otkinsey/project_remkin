@@ -34,7 +34,6 @@ def bigdump(request):
     data["events"]=cdata
     data["success"]=True
     return HttpResponse(json.dumps(data),content_type="application/json")
-    
 
 
 def taskdump(request):
@@ -45,10 +44,6 @@ def taskdump(request):
     data["events"]=cdata
     data["success"]=True
     return HttpResponse(json.dumps(data),content_type="application/json")
-
-
-
-
 
 def search(request):
     data=dict()
@@ -102,9 +97,21 @@ def tasksearch(request):
     data["success"]=True
     return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
+def rmtask(request):
+    return HttpResponse('{"success": true}',content_type="application/json")
+
+
+def rmevent(request):
+    return HttpResponse('{"success": true}',content_type="application/json")
+
+def blockuser(request):
+    return HttpResponse('{"success": true}',content_type="application/json")
+    
+
 
 
 def obliviate(request):
+    #If user=admin
     for thing in Event.objects.all():
         thing.delete()
     for thing in Task.objects.all():
@@ -130,6 +137,11 @@ def mkevent(request):
         newevent.save()
         return HttpResponse('{"success": true, "id": ' + str(newevent.id) + '}',content_type="application/json")
 
+
+
+
+
+
 @csrf_exempt
 def mktask(request):
     newtask=Task();
@@ -142,7 +154,6 @@ def mktask(request):
     parentevent=Event.objects.get(id__exact=int(request.POST['eventid']))
     #add task to tasklist
     parentevent.tasklist.add(newtask)
-
     #save event
     parentevent.save()    
     return HttpResponse('{"success": true, "id": ' + str(newtask.id) + ', "eventName": "' + str(parentevent.eventName) + '"}',content_type="application/json")
