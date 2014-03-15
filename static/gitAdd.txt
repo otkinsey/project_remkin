@@ -1,0 +1,4 @@
+mkdir /path/to/your/project
+cd /path/to/your/project
+git init
+git remote add origin https://otkinsey@bitbucket.org/otkinsey/handstack_web.git

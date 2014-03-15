@@ -1,0 +1,577 @@
+/* ==========================================================================
+   HTML5 Boilerplate styles - h5bp.com (generated via initializr.com)
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+em{
+	color:#5FBE74;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+form input{
+	margin-top:1em;
+	font-size:.7em;
+	height:2em;
+	display:inline-block;
+}
+
+form input:last
+form textarea{
+	margin-top:1em;
+	font-size:.7em;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+ul{
+	list-style-type:square;
+	line-height:1.3em;
+}
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+
+/* ===== Initializr Styles ==================================================
+   Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
+   ========================================================================== */
+
+body {
+    font: 16px/26px Helvetica, Helvetica Neue, Arial;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 0 5%;
+}
+
+/* ===================
+    ALL: Green Theme
+   =================== */
+
+.header-container {
+	background:url(../img/images/header_background_02.png);
+    border-bottom: .5em solid #F9480B;
+    background-size:cover;
+}
+
+.footer-container {
+   border-bottom: .5em solid #F9480B;
+     background:#F46737;
+}
+
+.header-container,
+.footer-container {
+   height:6em;
+}
+
+.slider-wrap{
+	height:18em;
+}
+
+.slider-frame{
+	display:none;
+}
+
+.slider-nav{
+	display:none;
+}
+
+.paginate-wrap ul{
+	display:none;
+}
+
+.main aside {
+    background: transparent;
+}
+
+.title {
+    color:#F58252;
+}
+
+.logo{
+    height:6em;
+    float:left;
+    margin:0em 1em 0em 0em;
+    display:inline-block;
+}
+
+
+/* ==============
+    MOBILE: Menu
+   ============== */
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+
+nav a {
+    display: block;
+    margin-bottom: 5%;
+    padding: 15px 0;
+    width:95%;
+    background:#F58252;
+    /*width:11%;*/
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    //background:;
+
+}
+
+nav a:hover,
+nav a:visited {
+    color: white;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* ==============
+    MOBILE: Main
+   ============== */
+
+.main {
+    padding: 30px 0;
+}
+
+.main article h1 {
+    font-size: 2em;
+}
+
+.main aside {
+    color: #000000;
+    font-size:1.5em;
+    padding: 0px 5% 10px;
+}
+
+.footer-container footer {
+    color: white;
+    padding: 20px 0;
+}
+
+/* ===============
+    ALL: IE Fixes
+   =============== */
+
+.ie7 .title {
+    padding-top: 20px;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media only screen and (min-width: 480px) {
+
+/* ====================
+    INTERMEDIATE: Menu
+   ==================== */
+
+    nav a {
+        display:inline-block;
+        width: 9%;
+        margin: 0 1%;
+        padding: 25px 2%;
+        margin-bottom: 0;
+    }
+
+    nav li:first-child a {
+        margin-left: 0;
+    }
+
+    nav li:last-child a {
+        margin-right: 0;
+    }
+
+.slider-wrap{
+	display:block;
+}
+
+.slider-frame {
+    background-image: url("../img/frame.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    border: 1px solid #C9C7C7;
+    border-radius: 4px;
+    height:19.7em;
+    width:70%;
+    position: relative;
+    overflow:hidden;
+    display:inline-block;
+}
+
+
+.slider{
+	width:80%;
+	//border:1px solid blue;
+	margin:auto;
+}
+
+.slider-nav{
+	width:5%;
+	height:20em;
+	//border:1px solid blue;
+	vertical-align:top;
+	display:inline-block;
+	cursor:pointer;
+}
+
+.slider-nav img{
+	position:relative;
+	top:30%;
+	width:100%;
+	}
+
+.slider-wrap{
+	width:85%;
+	display:;
+	margin:auto;
+}
+
+
+.slider-frame img{
+	width:96%;
+	display:block;
+	margin:auto;
+}
+
+.inner-frame{
+	position:relative;
+	top:.5em;
+	overflow:hidden;
+	height:95%;
+	margin:auto;
+	
+}
+
+.paginate-wrap{
+	width:75%;
+}
+
+.paginate-wrap > ul{
+	height:2em;
+	width:;
+	//border:1px solid blue;
+	list-style-type:none;
+	float:right;
+	margin:0;
+}
+
+.pagination{
+	background-image:url('../img/paginate.png');
+	background-size:contain;
+}
+
+.pagination-dark{
+	background-image:url('../img/paginate-dark.png');
+	background-size:contain;
+}
+
+.paginate-wrap > ul > li{
+	height:1em;
+	width:1em;
+	//border:1px blue solid;
+	float:left;
+	margin:0 .5em;
+}
+
+.form{
+	height:11em;
+}
+
+/* ========================
+    INTERMEDIATE: IE Fixes
+   ======================== */
+
+    nav ul li {
+        display: inline;
+    }
+
+    .oldie nav a {
+        margin: 0 0.7%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+/* ====================
+    WIDE: CSS3 Effects
+   ==================== */
+
+    .header-container {
+        -webkit-box-shadow: 0 5px 10px #aaa;
+           -moz-box-shadow: 0 5px 10px #aaa;
+                box-shadow: 0 5px 10px #aaa;
+    }
+
+/* ============
+    WIDE: Menu
+   ============ */
+
+    .title {
+        float: left;
+        color:#F58252;
+    }
+
+    nav {
+        float: right;
+        width: 50%;
+    }
+    
+    nav a {
+	background:none;
+    }    
+
+/* ============
+    WIDE: Main
+   ============ */
+
+    .main article {
+        float: left;
+        width: 57%;
+        margin:auto;
+    }
+
+    .main aside {
+        float: right;
+        width: 28%;
+        margin:auto;
+    }
+    
+    .slider_cont{
+    	height:20em;
+    }
+    
+	#signup{
+		position:relative;top:1em;
+	}
+	
+	#send{
+		position:relative;
+		top:4em;
+	}
+	
+	form textarea{
+		margin-top:1em;
+		height:10em:
+		width:20em;
+	}
+	
+}
+
+
+
+@media only screen and (min-width: 1140px) {
+
+/* ===============
+    Maximal Width
+   =============== */
+
+    .wrapper {
+        width: 1026px; /* 1140px - 10% for margins */
+        margin: 0 auto;
+    }
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+        font-weight:100;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
