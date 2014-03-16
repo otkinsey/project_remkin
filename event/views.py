@@ -204,7 +204,8 @@ def whoami(request):
         data["uid"]=request.user.id
         return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
     else:
-        data["success"]=False
+        data["success"]=True
+        data["uid"]=-1
         return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
 
