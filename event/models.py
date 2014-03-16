@@ -3,7 +3,19 @@ from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group, Permission
 
+
+
 # Create your models here.
+
+    
+class Profile(models.Model):
+    image=models.FileField(upload_to='profiles')
+    user = models.OneToOneField(User)
+
+class Usercategory(models.Model):
+    image=models.FileField(upload_to='groups')
+
+
 
 class Location(models.Model):
 

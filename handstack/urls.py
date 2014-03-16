@@ -16,6 +16,8 @@ urlpatterns = patterns('',
 
     url(r'^register/$', 'event.views.userregister', name='registration'),
     url(r'^login/$', 'event.views.userlogin', name='login'),
+    url(r'^logout/$', 'event.views.logout_view', name='logout'),
+    url(r'^whoami/$', 'event.views.whoami', name='whoami'),
 
     url(r'^obliviate/$', 'event.views.obliviate', name='obliviate'),
     # url(r'^blog/', include('blog.urls')),

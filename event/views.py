@@ -7,10 +7,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 import json
 import datetime
+from django.contrib.auth import logout
 
 from dateutil import parser
 
-from models import Event,Location,Task
+from models import Event,Location,Task,Profile,Usercategory
+
 
 # Create your views here.
 
@@ -97,9 +99,9 @@ def tasksearch(request):
     data["success"]=True
     return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
+#Modify models too
 def rmtask(request):
     return HttpResponse('{"success": true}',content_type="application/json")
-
 
 def rmevent(request):
     return HttpResponse('{"success": true}',content_type="application/json")
@@ -107,9 +109,6 @@ def rmevent(request):
 def blockuser(request):
     return HttpResponse('{"success": true}',content_type="application/json")
     
-
-
-
 def obliviate(request):
     #If user=admin
     for thing in Event.objects.all():
@@ -158,14 +157,58 @@ def mktask(request):
     parentevent.save()    
     return HttpResponse('{"success": true, "id": ' + str(newtask.id) + ', "eventName": "' + str(parentevent.eventName) + '"}',content_type="application/json")
 
+
+@csrf_exempt
+def mkgroup(request):
+    newtask=Task();
+    for field in request.POST:
+        setattr(newtask,field, request.POST[field])
+    user = authenticate(username='testuser', password='8jfkldsa8uew8')
+    newtask.creator=user
+    newtask.save()
+    #get event
+    parentevent=Event.objects.get(id__exact=int(request.POST['eventid']))
+    #add task to tasklist
+    parentevent.tasklist.add(newtask)
+    #save event
+    parentevent.save()
+    return HttpResponse('{"success": true, "id": ' + str(newtask.id) + ', "eventName": "' + str(parentevent.eventName) + '"}',content_type="application/json")
+
+
+
 def newuser(request):
     user = User.objects.create_user('testuser', 'james.andrix+user@gmail.com', '8jfkldsa8uew8')
     return HttpResponse('{"success": true}',content_type="application/json")
+
+
+
+
 
 def fakelogin(request):
     user = authenticate(username='testuser', password='8jfkldsa8uew8')
     login(request, user)
     return HttpResponse('{"success": true}',content_type="application/json")
+
+
+
+def logout_view(request):
+    logout(request)
+    data=dict();
+    data["success"]=True
+    return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
+
+def whoami(request):
+    data=dict();
+    if request.user.is_authenticated():
+        data["success"]=True
+        data["uid"]=request.user.id
+        return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
+    else:
+        data["success"]=False
+        return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
+
+
+
 
 #Registration Form
 
@@ -178,13 +221,23 @@ def fakelogin(request):
 def userregister(request):
     email=request.POST['email']
     pword=request.POST['pword']
-
-    user = User.objects.create_user(email, email, pword)
+    uname=request.POST['username']
+    data=dict();
     #test for already registered
-    user = authenticate(username=email, password=pword)
-    login(request, user)
     
-    return HttpResponse('{"success": true}',content_type="application/json")
+    newuser = User.objects.create_user(uname, email, pword)
+    user = authenticate(username=uname, password=pword)
+    login(request, user)
+
+    profile=Profile()
+    profile.user=user
+    profile.save()
+
+    data["success"]=True
+    data["uid"]=str(user.id)
+
+    return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
+    
 
 #Login Form
 
@@ -194,10 +247,19 @@ def userregister(request):
 #login Handler
 @csrf_exempt
 def userlogin(request):
-    email=request.POST['email']
     pword=request.POST['pword']
-    #test for already registered
-    user = authenticate(username=email, password=pword)
-    login(request, user)
-    return HttpResponse('{"success": true}',content_type="application/json")
+    uname=request.POST['username']
+
+    thisuser = authenticate(username=uname, password=pword)
+
+    data=dict()
+    if not thisuser or not thisuser.is_active:
+        data["success"]=False
+        data["reason"]="Authentication failed."
+        return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
+    else:
+        login(request, thisuser)
+        data["success"]=True
+        data["uid"]=thisuser.id
+        return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
