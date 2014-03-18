@@ -11,8 +11,9 @@ from django.contrib.auth import logout
 
 from dateutil import parser
 
-from models import Event,Location,Task,Profile,Usercategory
+from models import Event,Location,Task,Profile,Usercategory,Frontline
 
+from django.template import RequestContext, loader
 
 # Create your views here.
 
@@ -25,8 +26,12 @@ class ComplexEncoder(json.JSONEncoder):
 
 
 def homeindex(request):
-    return HttpResponse("Hello, handstack.")
-
+#    return HttpResponse("Hello, handstack.")
+    template=loader.get_template('home.html')
+    context = RequestContext(request, {
+        'pageinfo': 5,
+       })
+    return HttpResponse(template.render(context))
 
 def bigdump(request):
     data=dict()
@@ -36,6 +41,21 @@ def bigdump(request):
     data["events"]=cdata
     data["success"]=True
     return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+
+def frontlinedump(request):
+    data=dict()
+    cdata=dict()
+    if 'code' in request.GET and request.GET["code"]=="frob":
+        for thing in Frontline.objects.all():
+            cdata[str(thing.id)]=thing.to_dict()
+        data["contacts"]=cdata
+        data["success"]=True
+    else:
+        data["success"]=True
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
 
 
 def taskdump(request):
@@ -135,6 +155,24 @@ def mkevent(request):
 #    newevent.EventRSVPS=[user]
         newevent.save()
         return HttpResponse('{"success": true, "id": ' + str(newevent.id) + '}',content_type="application/json")
+
+
+
+
+
+@csrf_exempt
+def frontline(request):
+    newF=Frontline();
+    for field in request.POST:
+        setattr(newF,field, request.POST[field])
+    #get event
+    newF.save()
+    template=loader.get_template('template.html')
+    context = RequestContext(request, {
+        'pageinfo': "We appreciate your interest. ",
+       })
+    return HttpResponse(template.render(context))
+
 
 
 

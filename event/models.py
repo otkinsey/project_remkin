@@ -34,6 +34,17 @@ class Location(models.Model):
 
 
 
+class Frontline(models.Model):
+    email= models.CharField(max_length=500)
+    fname = models.CharField(max_length=500)
+    lname = models.CharField(max_length=500)
+    organization = models.CharField(max_length=500)
+    Comments = models.CharField(max_length=50000)
+    creationTime  = models.DateTimeField(auto_now_add=True)
+    def to_dict(self):
+        return model_to_dict(self)
+
+
 class Task(models.Model):
     taskTitle= models.CharField(max_length=500)
     assignments = models.ManyToManyField(User)
@@ -47,6 +58,8 @@ class Task(models.Model):
     creationTime  = models.DateTimeField(auto_now_add=True)
     def to_dict(self):
         return model_to_dict(self)
+
+
 
 
 class Event(models.Model):

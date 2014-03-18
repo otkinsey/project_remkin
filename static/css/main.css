@@ -416,8 +416,8 @@ nav a:hover {
 	}
 	
 	#send{
-		position:relative;
-		top:4em;
+    clear:both;
+    margin-bottom:2em;
 	}
 	
 	form textarea{

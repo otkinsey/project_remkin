@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     url(r'^maketask/$', 'event.views.mktask', name='maketask'),
     url(r'^fakeuser/$', 'event.views.newuser', name='newuser'),
     url(r'^fakelogin/$', 'event.views.fakelogin', name='fakelogin'),
+    url(r'^frontline/$', 'event.views.frontline', name='fakelogin'),
+    url(r'^fldump3224$', 'event.views.frontlinedump', name='fdump'),
 
     url(r'^register/$', 'event.views.userregister', name='registration'),
     url(r'^login/$', 'event.views.userlogin', name='login'),
