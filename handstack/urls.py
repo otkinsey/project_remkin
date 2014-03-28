@@ -21,6 +21,17 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'event.views.logout_view', name='logout'),
     url(r'^whoami/$', 'event.views.whoami', name='whoami'),
 
+    url(r'^rsvp/$', 'event.views.rsvpme', name='rsvp'),
+    url(r'^unrsvp/$', 'event.views.unrsvpme', name='unsrvp'),
+    url(r'^myevents/$', 'event.views.myevents', name='myevents'),
+
+    url(r'^taketask/$', 'event.views.taketask', name='taketask'),
+    url(r'^droptask/$', 'event.views.droptask', name='droptask'),
+    url(r'^mytasks/$', 'event.views.mytasks', name='mytasks'),
+    url(r'^givetask/$', 'event.views.givetask', name='givetask'),
+
+    url(r'^eventimage/$', 'event.views.eventimage', name='eventimage'),
+
     url(r'^obliviate/$', 'event.views.obliviate', name='obliviate'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', 'event.views.homeindex', name='home'),

@@ -67,6 +67,7 @@ class Event(models.Model):
     eventStartTime = models.CharField(max_length=500)
     eventAddress=models.CharField(max_length=500)
     image=models.FileField(upload_to='events')
+
     
     eventDuration = models.CharField(max_length=500)
     eventDescription = models.CharField(max_length=5000)
@@ -77,6 +78,7 @@ class Event(models.Model):
     creationTime  = models.DateTimeField(auto_now_add=True)
     eventComputedStartTime = models.DateTimeField()
     eventComputedEndTime = models.DateTimeField()
+    hidemode=models.IntegerField(default=0)
     EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist", blank=True)
     tasklist = models.ManyToManyField(Task)
     def to_dict(self):

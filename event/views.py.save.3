@@ -324,22 +324,26 @@ def mkevent(request):
 from django import forms
 
 class UploadFileForm(forms.Form):
-    eventid = forms.CharField(max_length=50)
-    eventimage = forms.FileField()
+    title = forms.CharField(max_length=50)
+    file  = forms.FileField()
 
+from django.forms import ModelForm
+
+class eventform(ModelForm):
+    class Meta:
+        model = Event
+        fields= ['image']
 
 
 @csrf_exempt
 def eventimage(request):
     data=dict()
     e=Event.objects
-    e=e.get(id__exact=int(request.POST['eventid'])) 
-    form = UploadFileForm(request.POST, request.FILES)
+    e=e.get(id__exact=int(request.POST['eventid']))
     e.image=request.FILES['eventimage']
     e.save()        
     data["success"]=True
-    return HttpResponse(json.dumps(data),content_type="application/json")
-
+    return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
 
 
