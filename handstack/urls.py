@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^givetask/$', 'event.views.givetask', name='givetask'),
 
     url(r'^eventimage/$', 'event.views.eventimage', name='eventimage'),
+    url(r'^geteventimage/$', 'event.views.geteventimage', name='geteventimage'),
 
     url(r'^obliviate/$', 'event.views.obliviate', name='obliviate'),
     # url(r'^blog/', include('blog.urls')),
