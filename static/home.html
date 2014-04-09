@@ -3,177 +3,132 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
+		<meta name= "viewport" content= "width=device-width, initial-scale=1.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>welcome to handstack</title>
 		<meta name="author" content="remkin" />
 		<!-- Date: 2014-02-25 -->
 		<link href= "css/main.css" rel= "stylesheet" type= "text/css">
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 		<link href= "css/normalize.css" rel= "stylesheet" type= "text/css">
 		<link href= "css/normalize.min.css" rel= "stylesheet" type= "text/css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   		<script src="js/vendor/1.10.1.min.js"></script>
   		<script src="js/main.js"></script>
+  	<script>
+  		$(document).ready(function(){
+  			$(".team_member").click(function(){
+  				var name = $(this)
+	  			$.get("about.html", function(data){
+ 	 				$(".main-container").html(data);
+  				}); 				
+  			});
+  		});
+
+  		$(document).ready(function(){
+  			$("#team").click(function(){
+	  			$.get("team.html", function(data){
+ 	 				$(".main-container").html(data);
+  				}); 				
+  			});
+  		});
+
+  		$(document).ready(function(){
+  			$("#about").click(function(){
+	  			$.get("about.html", function(data){
+ 	 				$(".main-container").html(data);
+  				}); 				
+  			});
+  		});
+  		
+  		$(document).ready(function(){
+  			$("#nav_pic-1").hover(function(){
+  				$("#nav_pic-1").attr("src", "img/hi_1-hl.png");
+  			}).mouseleave(function(){
+  				$("#nav_pic-1").attr("src", "img/hi_1.png");
+  			});
+  		});
+  		
+  		$(document).ready(function(){
+  			$("#nav_pic-2").hover(function(){
+  				$("#nav_pic-2").attr("src", "img/hi_2-hl.png");
+  			}).mouseleave(function(){
+  				$("#nav_pic-2").attr("src", "img/hi_2.png");
+  			});
+  		});
+  		
+  		$(document).ready(function(){
+  			$("#nav_pic-3").hover(function(){
+  				$("#nav_pic-3").attr("src", "img/hi_3-hl.png");
+  			}).mouseleave(function(){
+  				$("#nav_pic-3").attr("src", "img/hi_3.png");
+  			});
+  		});  		
+  	</script>	
 	</head>
 	<body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <div class="header-container">
-            <header class="wrapper clearfix">
-                <img src= "img/logo.png" class= "logo"><h1 class="title">HandStack</h1>
-                <nav>
-                    <ul>
-                        <li><a href='/home.html' >home</a></li>
-                        <li><a href='/about.html'>about</a></li>
-                        <li><a href='/register.html' >register</a></li>
-                        <li><a href='/contact.html' >contact</a></li>
-                    </ul>
-                </nav>
-            </header>
-        </div>
-        <div class= "main-container">
+<!----------------------header begins__-------------------------------------------->
+		<div class= "site_container">
+        <div class="header-container"> 
         	
+             	<div class= "header_element">
+             		<a href= "index.php" class= "h_e-1_lrg">
+             		<img src= "img/logo.png" class= "logo" >
+            		<img src= "img/handstack_b.png" class= "handstack">           		           		
+            		</a>             		
+             	</div>
+				<div class= "header_element">
+						<ul class= "nav_horizontal h_e-2_lrg">
+							<a href="index.php" id= "home"><li class= "inline_item"><img src= "img/hi_1.png" class= "nav_pic" id= "nav_pic-1"></li></a>
+							<a href="about.php" id= "about"><li class= "inline_item"><img src= "img/hi_2.png" class= "nav_pic" id= "nav_pic-2"></li></a>
+							<a href="team.php" id= "team"><li class= "inline_item"><img src= "img/hi_3.png" class= "nav_pic" id= "nav_pic-3"></li></a>
+						</ul>
+            	</div>	
+            	     	
+        	          
+       
+        </div><!---header-container----->
+<!----------------------header ends-------------------------------------------->
 
-
-            <div class="main wrapper clearfix">
-				<div>
-                <div class= "slider_cont"><!------media queries for different screen sizes------------------>
-<div class= "slider" >
-	<img id="1" src= "img/sliderImg_01.png">
-	<!--div class= "slider-wrap">
-	<div class= "slider-nav" style= "position:relative;left:.3em;" ><img src= "img/slider-nav-r.png" class= "" onclick="prev(); return false;"></div>
-	<div class= "slider-frame ">
-		<div class= "inner-frame">		
-		<div class= "imgDisplay_L" id= "FC_imgGallery">
-						
-		</div>
-		</div>				
+        <div class= "main-container">
+<div class= "slider">
+	<div class ="icon_large">
+		<img src= "img/hpi_1.png">
+		<span class="icon_text">
+			<h3>Get Things Done Together</h3>
+			Accomplishing tasks is easier than ever
+			before. Collaborate easily with your internal
+			teams, partners and volunteers.
+		</span>
 	</div>
-	<div class= "slider-nav" style= "position:relative;left:-.3em;" ><img src= "img/slider-nav-l.png" onclick="next(); return false;"></div>
-	<div class= "paginate-wrap">
-		<ul>
-			<li id= "t1" class="pagination"></li>
-			<li id= "t2" class="pagination"></li>
-			<li id= "t3" class="pagination"></li>
-			<li id= "t4" class="pagination"></li>
-		</ul>
-	</div>	
-	</div-->
-	<!--div class= "FC_imgControl_cont">
-	<div class="FC_imgControl " id= "FC_prev"><a  href= "#" onclick="prev(); return false;"><img id= "ssImg_1" class= "ssImg" src= "images/video/controls/prev_off.png" ></a></div>
-	<div class="FC_imgControl " id= "FC_pause"><a  href= "#" onclick="pause(); return false;"><img id= "ssImg_2" class= "ssImg" src= "images/video/controls/pause_off.png"></a></div>
-	<div class="FC_imgControl " id= "FC_next"><a href= "#" onclick="next(); return false;"><img id= "ssImg_3" class= "ssImg" src= "images/video/controls/next_off.png"></a></div>
-	</div-->	
-	<!--script>
-		sliderInt = 1;
-		sliderNext = 2;
-		t_Int = 1;
-		t_Next = 2;
-		
-		$(document).ready(function(){
-			$("#FC_imgGallery>img#1").fadeIn(1500);
-			//$("#t1").removeClass("pagination");
-			$("#t1").addClass("pagination-dark");
-			startLoop();
-		});
-		
-		function startLoop(){
-			count = $("#FC_imgGallery>img").size();
-			
-			t_count = 4
-			
-			loop = setInterval(function(){
-				
-				if(sliderNext > count){
-					sliderNext = 1;
-					sliderInt = 1;
-				}
-				
-				if(t_Next > t_count){
-					t_Next = 1;
-					t_Int =1;
-				}
-								
-				$("#FC_imgGallery>img").hide();
-				$("#FC_imgGallery>img#" + sliderNext).fadeIn(2000);
-				$(".pagination").removeClass("pagination-dark");
-				$("#t" + t_Next).addClass("pagination-dark");
-				sliderInt = sliderNext;
-				sliderNext = sliderNext + 1;
-				t_Int = t_Next;
-				t_Next = t_Next + 1;
-			},5000)
-		}
-		
-		function prev(){
-			newSlide = sliderInt - 1;
-			newSlide= t_Int - 1;
-			showSlide(newSlide);
-		}
-
-		function pause(){
-		stopLoop();
-		}
-
-
-		function next(){
-			newSlide = sliderInt + 1;
-			newSlide = t_Int + 1;
-			showSlide(newSlide);
-		}	
-		
-		function stopLoop(){
-			window.clearInterval(loop);
-		}
-		
-		function showSlide(id){
-			stopLoop();
-				if(id > count){
-					id = 1;
-				}else if(id < 1){
-					id = count;
-				}
-								
-				$("#FC_imgGallery>img").hide();
-				$("#FC_imgGallery>img#" + id).fadeIn(2000);
-				$(".pagination").removeClass("pagination-dark");
-				$("#t" + id).addClass("pagination-dark");
-				sliderInt = id;
-				sliderNext = id + 1;
-				t_Int = id;
-				t_Next = id + 1;
-			startLoop();		
-		}	
-		</script-->	
+	<div class ="icon_large">
+		<img src= "img/hpi_2.png">
+		<span class="icon_text">
+			<h3>Remind people automatically</h3>
+				Scheduled reminders make it easy track which tasks have been completed and to communicate project needs and objectives.
+		</span>				
 	</div>
-                </div>					
-				</div>
-				<div class= "article_wrap">
-                <article>
-                    <header>
-                        <h1>Welcome to HandStack!</h1>
-                        <h2>HandStack allows you to connect with cool people doing cool stuff in your area and beyond.</h2>
-                    </header> 
-                </article>
-                <aside>
-                	<ul>
-                		<li>share tasks</li>
-                		<li>organize on the go</li>
-                		<li>connect your team</li>
-                		<li>collaborate with others</li>
-                		<li>publicise your event</li>
-                	</ul>
-                </aside>					
-				</div>
-            </div> <!-- #main -->
+	<div class ="icon_large">
+		<img src= "img/hpi_3.png">
+		<span class="icon_text">
+			<h3>Connect with the community</h3>
+			Increase active community involvement
+			in your projects, grow your network
+			and make your events successful!
+		</span>	
+	</div>
+</div>	
+<div class= "icon_text" id= "input_title"><h3>Want to be a beta tester?</h3></div>
+<div class= "bottom_div">
+	<form method= "post" action= "thank_you.html" id= "form_1">
+		<input type= "text" name= "email" class= "inline_item" placeholder= "enter your email." id= "ei_1"><br>
+		<textarea name= "how" cols="40" rows="5" placeholder= "how do you plan to use handstack?" id= "comments"></textarea>
+		<button type= "" name= "request" value= "beta_tester" class= "button" id= "eb_1">sure sign me up!</button> 
+	</form>
+</div>
 
-        </div><!----end of "main-container"------>
-        <div class="footer-container">
-            <footer class="wrapper">
-                <h3>HandStack</h3>
-            </footer>
-        </div>		
+		</div><!----end of "main-container"------> 
+	        	
 	</body>
 </html>
 
