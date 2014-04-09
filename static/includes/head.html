@@ -8,12 +8,13 @@
 		<title>welcome to handstack</title>
 		<meta name="author" content="remkin" />
 		<!-- Date: 2014-02-25 -->
-		<link href= "css/main.css" rel= "stylesheet" type= "text/css">
-		<link href= "css/normalize.css" rel= "stylesheet" type= "text/css">
-		<link href= "css/normalize.min.css" rel= "stylesheet" type= "text/css">
+		<link href= "/css/main.css" rel= "stylesheet" type= "text/css">
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<link href= "/css/normalize.css" rel= "stylesheet" type= "text/css">
+		<link href= "/css/normalize.min.css" rel= "stylesheet" type= "text/css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  		<script src="js/vendor/1.10.1.min.js"></script>
-  		<script src="js/main.js"></script>
+  		<script src="/js/vendor/1.10.1.min.js"></script>
+  		<script src="/js/main.js"></script>
   	<script>
   		$(document).ready(function(){
   			$(".team_member").click(function(){
@@ -40,25 +41,47 @@
   			});
   		});
   		
+  		$(document).ready(function(){
+  			$("#nav_pic-1").hover(function(){
+  				$("#nav_pic-1").attr("src", "/img/hi_1-hl.png");
+  			}).mouseleave(function(){
+  				$("#nav_pic-1").attr("src", "/img/hi_1.png");
+  			});
+  		});
   		
+  		$(document).ready(function(){
+  			$("#nav_pic-2").hover(function(){
+  				$("#nav_pic-2").attr("src", "/img/hi_2-hl.png");
+  			}).mouseleave(function(){
+  				$("#nav_pic-2").attr("src", "/img/hi_2.png");
+  			});
+  		});
+  		
+  		$(document).ready(function(){
+  			$("#nav_pic-3").hover(function(){
+  				$("#nav_pic-3").attr("src", "/img/hi_3-hl.png");
+  			}).mouseleave(function(){
+  				$("#nav_pic-3").attr("src", "/img/hi_3.png");
+  			});
+  		});  		
   	</script>	
 	</head>
 	<body>
-
+<!----------------------header begins__-------------------------------------------->
 		<div class= "site_container">
         <div class="header-container"> 
         	
              	<div class= "header_element">
-             		<a href= "index.php" class= "h_e-1_lrg">
-             		<img src= "img/logo.png" class= "logo" >
-            		<img src= "img/handstack_b.png" class= "handstack">           		           		
+             		<a href= "/" class= "h_e-1_lrg">
+             		<img src= "/img/logo.png" class= "logo" >
+            		<img src= "/img/handstack_b.png" class= "handstack">           		           		
             		</a>             		
              	</div>
 				<div class= "header_element">
 						<ul class= "nav_horizontal h_e-2_lrg">
-							<a href="index.php" id= "home"><li class= "inline_item">Home</li></a>
-							<a href="about.php" id= "about"><li class= "inline_item">About Us</li></a>
-							<a href="team.php" id= "team"><li class= "inline_item">Team</li></a>
+							<a href="/" id= "home"><li class= "inline_item"><img src= "/img/hi_1.png" class= "nav_pic" id= "nav_pic-1"></li></a>
+							<a href="/about.html" id= "about"><li class= "inline_item"><img src= "/img/hi_2.png" class= "nav_pic" id= "nav_pic-2"></li></a>
+							<a href="/team.html" id= "team"><li class= "inline_item"><img src= "/img/hi_3.png" class= "nav_pic" id= "nav_pic-3"></li></a>
 						</ul>
             	</div>	
             	     	
@@ -66,4 +89,4 @@
        
         </div><!---header-container----->
         <div class= "main-container">
-        	
+<!----------------------header ends-------------------------------------------->
