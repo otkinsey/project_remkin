@@ -11,8 +11,6 @@ urlpatterns = patterns('',
     url(r'^tasksearch/$', 'event.views.tasksearch', name='tasksearch'),
     url(r'^make/$', 'event.views.mkevent', name='make'),
     url(r'^maketask/$', 'event.views.mktask', name='maketask'),
-    url(r'^fakeuser/$', 'event.views.newuser', name='newuser'),
-    url(r'^fakelogin/$', 'event.views.fakelogin', name='fakelogin'),
     url(r'^frontline/$', 'event.views.frontline', name='fakelogin'),
     url(r'^fldump3224$', 'event.views.frontlinedump', name='fdump'),
 
@@ -30,13 +28,21 @@ urlpatterns = patterns('',
     url(r'^mytasks/$', 'event.views.mytasks', name='mytasks'),
     url(r'^givetask/$', 'event.views.givetask', name='givetask'),
 
+    url(r'^mkgroup/$', 'event.views.mkgroup', name='mkgroup'),
+
+
+
     url(r'^eventimage/$', 'event.views.eventimage', name='eventimage'),
     url(r'^geteventimage/$', 'event.views.geteventimage', name='geteventimage'),
 
     url(r'^obliviate/$', 'event.views.obliviate', name='obliviate'),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^bloorp/', include(admin.site.urls)),
+    url(r'^blaap/(?P<path>.*)$', 'django.views.static.serve',        {'document_root': '/var/django/stylefiles'}),
+
     url(r'^$', 'event.views.homeindex', name='home'),
+    url(r'^(?P<path>.*\.html)$', 'event.views.htmlserve', ),
+
     url(r'^(?P<path>.*)$', 'django.views.static.serve',        {'document_root': '/var/django/handstack/static'}),
 
-    url(r'^admin/', include(admin.site.urls)),
 )

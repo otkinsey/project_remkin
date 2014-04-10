@@ -15,9 +15,8 @@ class Profile(models.Model):
 
 class Usercategory(models.Model):
     image=models.FileField(upload_to='groups')
-    
     group=models.OneToOneField(Group)
-
+    
 
 class Location(models.Model):
 
@@ -97,4 +96,5 @@ admin.site.register(Event)
 
 admin.site.register(Task)
 admin.site.register(Frontline)
+admin.site.register(Usercategory)
 

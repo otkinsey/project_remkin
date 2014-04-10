@@ -28,6 +28,8 @@ ALLOWED_HOSTS = []
 
 TEMPLATE_DIRS='/var/django/handstack/static'
 
+TEMPLATE_CONTEXT_PROCESSORS =('django.contrib.messages.context_processors.messages','django.contrib.auth.context_processors.auth')
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -85,4 +87,6 @@ MEDIA_ROOT='/var/django/uploads/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/blaap/'
+
+STATIC_ROOT='/var/django/stylefiles'

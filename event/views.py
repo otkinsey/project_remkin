@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db import models
 from django.forms.models import model_to_dict
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.contrib.auth import authenticate, login
 import json
 import datetime
@@ -408,19 +408,17 @@ def mktask(request):
 
 @csrf_exempt
 def mkgroup(request):
-    newgroup=Group();
-    for field in request.POST:
-        setattr(newtask,field, request.POST[field])
     user = request.user
-    newtask.creator=user
-    newtask.save()
-    #get event
-    parentevent=Event.objects.get(id__exact=int(request.POST['eventid']))
-    #add task to tasklist
-    parentevent.tasklist.add(newtask)
-    #save event
-    parentevent.save()
-    return HttpResponse('{"success": true, "id": ' + str(newtask.id) + ', "eventName": "' + str(parentevent.eventName) + '"}',content_type="application/json")
+    newgroup,created=Group.objects.get_or_create(name=request.GET['name'])
+    newcat=Usercategory()
+    newcat.group=newgroup
+    newgroup.save()
+
+    newgroup.user_set.add(user)
+    
+    newgroup.save()
+    newcat.save()
+    return HttpResponse('{"success": true, "gid": ' + str(newcat.id) + '}',content_type="application/json")
 
 
 
