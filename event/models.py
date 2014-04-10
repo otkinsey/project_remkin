@@ -3,6 +3,7 @@ from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group, Permission
 
+from django.contrib import admin
 
 
 # Create your models here.
@@ -14,7 +15,8 @@ class Profile(models.Model):
 
 class Usercategory(models.Model):
     image=models.FileField(upload_to='groups')
-
+    
+    group=models.OneToOneField(Group)
 
 
 class Location(models.Model):
@@ -31,6 +33,8 @@ class Location(models.Model):
     rsvps = models.CharField(max_length=500)
     def to_dict(self):
         return model_to_dict(self)
+
+
 
 
 
@@ -81,3 +85,16 @@ class Event(models.Model):
     tasklist = models.ManyToManyField(Task)
     def to_dict(self):
         return model_to_dict(self)
+
+
+
+
+#class EventAdmin Admin(admin.ModelAdmin):
+#    list_display = ('eventName', 'eventAddress', 'creator')
+
+
+admin.site.register(Event)
+
+admin.site.register(Task)
+admin.site.register(Frontline)
+

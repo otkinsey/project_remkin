@@ -1,5 +1,3 @@
-
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -35,6 +33,17 @@ def homeindex(request):
         'pageinfo': 5,
        })
     return HttpResponse(template.render(context))
+
+
+def htmlserve(request,path,filename="template.html"):
+#    return HttpResponse("Hello, handstack.")
+    template=loader.get_template(path)
+    context = RequestContext(request, {
+        'pageinfo': filename,
+       })
+    return HttpResponse(template.render(context))
+
+
 
 def bigdump(request):
     data=dict()
@@ -211,11 +220,6 @@ def taketask(request):
     else:
         data["success"]=False
         return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
-
-
-
-
-
 
 
 
@@ -404,7 +408,7 @@ def mktask(request):
 
 @csrf_exempt
 def mkgroup(request):
-    newtask=Task();
+    newgroup=Group();
     for field in request.POST:
         setattr(newtask,field, request.POST[field])
     user = request.user
