@@ -18,6 +18,7 @@ from django.template import RequestContext, loader
 
 # Create your views here.
 
+
 class ComplexEncoder(json.JSONEncoder):
     def default(self, obj):
         try:
