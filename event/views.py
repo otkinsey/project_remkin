@@ -453,6 +453,7 @@ def whoami(request):
 #Registration name lookup
 
 #Registration Handler
+
 @csrf_exempt
 def userregister(request):
     email=request.POST['email']
