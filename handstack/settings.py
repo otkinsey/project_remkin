@@ -60,15 +60,20 @@ WSGI_APPLICATION = 'handstack.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'actup1',
-        'USER': 'actup1',
-        'PASSWORD': '298northampton',
-        'HOST': '127.0.0.1',
-    }
-}
+import hsdbinfo
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'actup1',
+#        'USER': 'actup1',
+#        'PASSWORD': '298northampton',
+#        'HOST': '127.0.0.1',
+#    }
+#}
+
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
