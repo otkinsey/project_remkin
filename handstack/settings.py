@@ -62,6 +62,9 @@ WSGI_APPLICATION = 'handstack.wsgi.application'
 
 import hsdbinfo
 
+DATABASES = hsdbinfo.DATABASES
+
+
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.mysql',
