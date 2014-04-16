@@ -3,6 +3,11 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+
+
 urlpatterns = patterns('',
     # Examples:
     url(r'^dump/$', 'event.views.bigdump', name='dump'),
@@ -43,6 +48,6 @@ urlpatterns = patterns('',
     url(r'^$', 'event.views.homeindex', name='home'),
     url(r'^(?P<path>.*\.html)$', 'event.views.htmlserve', ),
 
-    url(r'^(?P<path>.*)$', 'django.views.static.serve',        {'document_root': '/var/django/handstack/static'}),
+    url(r'^(?P<path>.*)$', 'django.views.static.serve',        {'document_root': BASE_DIR+'/static'}),
 
 )
