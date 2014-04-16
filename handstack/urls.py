@@ -35,7 +35,7 @@ urlpatterns = patterns('',
 
     url(r'^mkgroup/$', 'event.views.mkgroup', name='mkgroup'),
 
-
+    url(r'^lookupuser/$', 'event.views.LookUpUserName', name='luun'),
 
     url(r'^eventimage/$', 'event.views.eventimage', name='eventimage'),
     url(r'^geteventimage/$', 'event.views.geteventimage', name='geteventimage'),

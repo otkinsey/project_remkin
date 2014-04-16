@@ -60,9 +60,9 @@ WSGI_APPLICATION = 'handstack.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-import hsdbinfo
+import handstack.hsdbinfo
 
-DATABASES = hsdbinfo.DATABASES
+DATABASES = handstack.hsdbinfo.DATABASES
 
 
 #DATABASES = {
