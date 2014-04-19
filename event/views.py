@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db import models
@@ -36,12 +36,29 @@ def homeindex(request):
     return HttpResponse(template.render(context))
 
 
-def htmlserve(request,path,filename="template.html"):
+def htmlserve(request,path,filename="thankyou.html"):
 #    return HttpResponse("Hello, handstack.")
     template=loader.get_template(path)
     context = RequestContext(request, {
         'pageinfo': filename,
        })
+    return HttpResponse(template.render(context))
+
+
+
+def htmlevent(request,eid):
+#    return HttpResponse("Hello, handstack.")
+    template=loader.get_template("eventemplate.html")
+    q=Event.objects
+    tdata=dict()
+    cdata=dict()
+
+    q=q.filter(id=int(eid))
+
+    for thing in q.all():
+        cdata=thing.to_dict()
+
+    context = RequestContext(request, cdata)
     return HttpResponse(template.render(context))
 
 
@@ -85,8 +102,10 @@ def search(request):
     cdata=dict()
     
     q=Event.objects
-    latDist=0.1
-    lonDist=0.1
+    latDist=1.0
+    lonDist=1.0
+    ringwdth=0.1
+    qdata=dict()
 
     if 'eventid' in request.GET:
         q=q.filter(id=int(request.GET['eventid']) )
@@ -103,16 +122,32 @@ def search(request):
     if 'startbefore' in request.GET:
         startbefore=request.GET['startbefore']
         q=q.filter(eventComputedStartTime__lt=parser.parse(startbefore))
+    
+    if 'ring' in request.GET:
+        if 'latitude' in request.GET:
+            lat=float(request.GET['latitude'])
+        if 'longitude' in request.GET:
+            lon=float(request.GET['longitude'])
+        ring=float(request.GET['ring'])
 
     if 'latitude' in request.GET:
         lat=float(request.GET['latitude'])
+        qdata['latitude']=lat
+
         q=q.filter(latitude__range=(lat-latDist, lat+latDist))
     if 'longitude' in request.GET:
         lon=float(request.GET['longitude'])
+        qdata['longitude']=lon
         q=q.filter(longitude__range=(lon-lonDist, lon+lonDist))
+
+
+
     for thing in q.all():
         cdata[str(thing.id)]=thing.to_dict()
     data["events"]=cdata
+    qdata['lonDist']=lonDist
+    qdata['latDist']=latDist
+    data['queryterms']=qdata
     data["success"]=True
     return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
@@ -121,8 +156,6 @@ def tasksearch(request):
     cdata=dict()
     
     q=Event.objects
-    latDist=0.1
-    lonDist=0.1
 
     if 'eventid' in request.GET:
         q=q.get(id__exact=int(request.GET['eventid']))
@@ -154,8 +187,8 @@ def rsvpme(request):
     cdata=dict()
     q=Event.objects
     if request.user.is_authenticated():
-        if 'eventid' in request.POST:
-            q=q.get(id__exact=int(request.POST['eventid']))
+        if 'eventid' in request.GET:
+            q=q.get(id__exact=int(request.GET['eventid']))
             if not request.user.id in q.EventRSVPS.all():
                 q.EventRSVPS.add(request.user)
                 q.save()
@@ -352,15 +385,24 @@ import magic  #wtf python
 
 @csrf_exempt
 def geteventimage(request):
-    
-    e=Event.objects
-    e=e.get(id__exact=int(request.GET['eventid']))
-    
-    file=e.image
-    handle=file._get_file()
-    data=handle.read()
-    
-    type=magic.from_buffer(data,mime=True)
+    if "eventid" in request.GET:
+        e=Event.objects
+        e=get_object_or_404(Event,id__exact=int(request.GET['eventid']))
+        if "thumbnail" in request.GET:
+            file=e.image_thumbnail
+        else:
+            file=e.image
+        handle=file._get_file()
+        data=handle.read()
+        type=magic.from_buffer(data,mime=True)
+    if "gid" in request.GET:
+        cat=usercategory.objects
+        cat=e.get(id__exact=int(request.GET['eventid']))
+        file=e.image
+        handle=file._get_file()
+        data=handle.read()
+        type=magic.from_buffer(data,mime=True)
+
     return HttpResponse(data,content_type=type)
 
 
@@ -378,7 +420,7 @@ def frontline(request):
         setattr(newF,field, request.POST[field])
     #get event
     newF.save()
-    template=loader.get_template('template.html')
+    template=loader.get_template('thankyou.html')
     context = RequestContext(request, {
         'pageinfo': "We appreciate your interest. ",
        })
@@ -413,6 +455,7 @@ def mkgroup(request):
     newgroup,created=Group.objects.get_or_create(name=request.GET['name'])
     newcat=Usercategory()
     newcat.group=newgroup
+    
     newgroup.save()
 
     newgroup.user_set.add(user)
@@ -420,6 +463,55 @@ def mkgroup(request):
     newgroup.save()
     newcat.save()
     return HttpResponse('{"success": true, "gid": ' + str(newcat.id) + '}',content_type="application/json")
+
+
+
+#get group image (overload get user image)
+
+
+@csrf_exempt
+def listgroups(request):
+    data=dict()
+    data["success"]=True
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+@csrf_exempt
+def joingroup(request):
+    data=dict()
+    data["success"]=True
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+@csrf_exempt
+def leavegroup(request):
+    data=dict()
+    data["success"]=True
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+@csrf_exempt
+def kickuserfromgroup(request):
+    data=dict()
+    data["success"]=True
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+
+
+@csrf_exempt
+def LookUpUserName(request):
+    data=dict()
+    try:
+        user = User.objects.get(username=request.GET['username'])
+    except User.DoesNotExist:
+        data["uid"]=-1
+        data["success"]=True
+        return HttpResponse(json.dumps(data),content_type="application/json")
+    data["success"]=True
+    data["uid"]=user.id
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
 
 
 
@@ -444,15 +536,7 @@ def whoami(request):
         return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
 
-
-
-#Registration Form
-
-#static
-
 #Registration name lookup
-
-#Registration Handler
 
 @csrf_exempt
 def userregister(request):
@@ -476,9 +560,12 @@ def userregister(request):
     return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
     
 
+
+
+
+
 #Login Form
 
-#static
 
 
 #login Handler

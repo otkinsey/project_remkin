@@ -37,8 +37,10 @@ urlpatterns = patterns('',
 
     url(r'^lookupuser/$', 'event.views.LookUpUserName', name='luun'),
 
+
     url(r'^eventimage/$', 'event.views.eventimage', name='eventimage'),
     url(r'^geteventimage/$', 'event.views.geteventimage', name='geteventimage'),
+    url(r'^getimage/$', 'event.views.geteventimage', name='geteventimage'),
 
     url(r'^obliviate/$', 'event.views.obliviate', name='obliviate'),
     # url(r'^blog/', include('blog.urls')),
@@ -46,7 +48,8 @@ urlpatterns = patterns('',
     url(r'^blaap/(?P<path>.*)$', 'django.views.static.serve',        {'document_root': '/var/django/stylefiles'}),
 
     url(r'^$', 'event.views.homeindex', name='home'),
-    url(r'^(?P<path>.*\.html)$', 'event.views.htmlserve', ),
+    url(r'^(?P<path>.*\.html)$', 'event.views.htmlserve', name='htmlserve' ),
+    url(r'^(\d+)$', 'event.views.htmlevent',  name='htmlevent'),
 
     url(r'^(?P<path>.*)$', 'django.views.static.serve',        {'document_root': BASE_DIR+'/static'}),
 

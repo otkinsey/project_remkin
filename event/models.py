@@ -5,7 +5,8 @@ from django.contrib.auth.models import Group, Permission
 
 from django.contrib import admin
 
-
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 # Create your models here.
 
     
@@ -70,7 +71,12 @@ class Event(models.Model):
     eventStartTime = models.CharField(max_length=500)
     eventAddress=models.CharField(max_length=500)
     image=models.FileField(upload_to='events')
-    
+
+    image_thumbnail =ImageSpecField(source='image',
+                                      processors=[ResizeToFill(494, 180)],
+                                      format='JPEG',
+                                      options={'quality': 90})
+
     eventDuration = models.CharField(max_length=500)
     eventDescription = models.CharField(max_length=5000)
     eventLocationDescription = models.CharField(max_length=500)
