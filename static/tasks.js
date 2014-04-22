@@ -1,25 +1,28 @@
 
+lasttask={};
 
 function loadtasklist(eid){
+    $.getJSON( "/tasksearch/?eventid="+eid.toString(),function(data){buildlist(data)});
+}
 
-    $.getJSON( "/tasksearch/?eventid="+eid.toString(), function( data ) {
+function buildlist(data){
+ //var items = [];
 
-        var items = [];
+console.log(data)
+        for (var tsk in data['tasks']) {
 
-        $.each( data['tasks'], function( key, val ) {
 
-            items.push( "<li id='" + key + "' >" + val['taskTitle'] + "</li>" )
+       Task= $( "<div/>", { "id": tsk ,"class": "taskitem"})
+    Task.html( data.tasks[tsk]["taskTitle"] )
+    Task.append("<input type='checkbox' value="+data.tasks[tsk]["taskStatus"]+">");
+    Task.append("");
 
-        });
 
-        $( "#tasklist" ).replaceWith(
+Task.appendTo("#tasklist");
 
-        $( "<ul/>", { "id": "#tasklist",
-            "class": "taskitem",
-        html: items.join( "" )
-        })
-        );
-    });
 
+
+        }
 
 }
+

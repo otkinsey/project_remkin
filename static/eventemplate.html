@@ -8,7 +8,7 @@
 <div id="eventdescription">
 {{ eventDescription }}
 </div>
-<div id="statrtime">
+<div id="starttime">
 {{ eventStartTime }}
 </div>
 <div id="address">
@@ -18,15 +18,15 @@
 {{ eventLocationDescription }}
 </div>
 Tasklist:
-<ul id="tasklist" >
+<div id="tasklist"></div>
 
-</ul>
 <script>
+
 loadtasklist({{ id }});
 </script>
 
-
-
+--
+<!--
 <img id="eventimage" src="/geteventimage/?eventid={{ id }}"/> <br>
 </div>	
 <div id="googlemap">
@@ -37,6 +37,8 @@ loadtasklist({{ id }});
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAHWhmUPRRPL5vOozE5H9Pj63jdZrMnq34
     &q={{ latitude }}+{{ longitude }}+{{ eventAddress }}">
 </iframe>
+
+-->
 </div>
 
 		</div><!----end of "main-container"------> 
