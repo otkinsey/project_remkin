@@ -14,7 +14,7 @@ body {
     font-size: 1em;
     line-height: 1.4;
     overflow-x:hidden;
-    background:url("../img/bkgd_b.png");
+    background:url("../img/bkgd_b.jpg");
     font-family:'Lato', sans-serif;
 }
 
@@ -109,7 +109,7 @@ body {
     font-size: 1em;
     line-height: 1.4;
     overflow-x:hidden;
-    background:url("../img/bkgd_b.png");
+    background:url("../img/bkgd_b.jpg");
     background-repeat:none;
 }
 
@@ -521,7 +521,7 @@ body {
     font-size: 1em;
     line-height: 1.4;
     overflow-x:hidden;
-    background:url("../img/bkgd_b.png" );
+    background:url("../img/bkgd_b.jpg" );
 }
 
 /* ====================
