@@ -41,6 +41,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'event',
     'imagekit',
+    'south',
+    'django_extensions',
+    'reversion',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -11,11 +11,13 @@ function buildlist(data){
 console.log(data)
         for (var tsk in data['tasks']) {
 
-
+mode="";
        Task= $( "<div/>", { "id": tsk ,"class": "taskitem"})
     Task.html( data.tasks[tsk]["taskTitle"] )
-    Task.append("<input type='checkbox' value="+data.tasks[tsk]["taskStatus"]+">");
-    Task.append("");
+    
+    if (data.tasks[tsk]["taskStatus"]=="True"){
+        mode=" checked ";}
+    Task.append("<input type='checkbox' id='tstatus"+tsk+"' name='taskStatus"+tsk+"'"+ mode +"value='True' onClick='taskstatusupdate("+tsk+")'>");
 
 
 Task.appendTo("#tasklist");
@@ -23,6 +25,25 @@ Task.appendTo("#tasklist");
 
 
         }
+
+}
+
+function taskstatusupdate(tid){
+console.log(tid)
+
+mode="False"
+if ($("#tstatus"+tid.toString()).is(":checked")) {
+mode="True"
+}
+console.log (mode)
+
+$.ajax({url: "/taskupdate/",
+    type:"POST",
+    data: {"taskStatus":mode,
+           "taskid":tid.toString()
+          }
+    });
+
 
 }
 

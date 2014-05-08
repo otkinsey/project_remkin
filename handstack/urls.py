@@ -14,10 +14,15 @@ urlpatterns = patterns('',
     url(r'^search/$', 'event.views.search', name='search'),
     url(r'^taskdump/$', 'event.views.taskdump', name='taskdump'),
     url(r'^tasksearch/$', 'event.views.tasksearch', name='tasksearch'),
+
     url(r'^make/$', 'event.views.mkevent', name='make'),
+    url(r'^eventupdate/$', 'event.views.eventupdate', name='eventupdate'),
+
+
     url(r'^maketask/$', 'event.views.mktask', name='maketask'),
+
+
     url(r'^frontline/$', 'event.views.frontline', name='fakelogin'),
-    url(r'^fldump3224$', 'event.views.frontlinedump', name='fdump'),
 
     url(r'^register/$', 'event.views.userregister', name='registration'),
     url(r'^login/$', 'event.views.userlogin', name='login'),
@@ -33,12 +38,26 @@ urlpatterns = patterns('',
     url(r'^mytasks/$', 'event.views.mytasks', name='mytasks'),
     url(r'^givetask/$', 'event.views.givetask', name='givetask'),
 
+    url(r'^taskupdate/$', 'event.views.taskupdate', name='taskupdate'),
+
     url(r'^mkgroup/$', 'event.views.mkgroup', name='mkgroup'),
+    url(r'^listgroups/$', 'event.views.listgroups', name='listgroups'),
+    url(r'^joingroup/$', 'event.views.mkgroup', name='joingroup'),
+    url(r'^leavegroup/$', 'event.views.mkgroup', name='leavegroup'),
+    url(r'^kickgroup/$', 'event.views.mkgroup', name='kickgroup'),
+    
+    url(r'^mkcomment/$', 'event.views.mkcomment', name='mkcomment'),
+    url(r'^comments/$', 'event.views.comments', name='mkcomment'),
+    url(r'^rmcomment/$', 'event.views.rmcomment', name='mkcomment'),
+
+
+    url(r'^lookupuid/$', 'event.views.LookUpUid', name='luuid'),
 
     url(r'^lookupuser/$', 'event.views.LookUpUserName', name='luun'),
 
 
     url(r'^eventimage/$', 'event.views.eventimage', name='eventimage'),
+    url(r'^image/$', 'event.views.eventimage', name='eventimage'),
     url(r'^geteventimage/$', 'event.views.geteventimage', name='geteventimage'),
     url(r'^getimage/$', 'event.views.geteventimage', name='geteventimage'),
 
@@ -46,11 +65,9 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^bloorp/', include(admin.site.urls)),
     url(r'^blaap/(?P<path>.*)$', 'django.views.static.serve',        {'document_root': '/var/django/stylefiles'}),
-
     url(r'^$', 'event.views.homeindex', name='home'),
     url(r'^(?P<path>.*\.html)$', 'event.views.htmlserve', name='htmlserve' ),
     url(r'^(\d+)$', 'event.views.htmlevent',  name='htmlevent'),
 
     url(r'^(?P<path>.*)$', 'django.views.static.serve',        {'document_root': BASE_DIR+'/static'}),
-
 )
