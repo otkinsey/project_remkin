@@ -20,6 +20,7 @@ urlpatterns = patterns('',
 
 
     url(r'^maketask/$', 'event.views.mktask', name='maketask'),
+    url(r'^mki/$', 'event.views.mki', name='mki'),
 
 
     url(r'^frontline/$', 'event.views.frontline', name='fakelogin'),
@@ -45,6 +46,8 @@ urlpatterns = patterns('',
     url(r'^joingroup/$', 'event.views.mkgroup', name='joingroup'),
     url(r'^leavegroup/$', 'event.views.mkgroup', name='leavegroup'),
     url(r'^kickgroup/$', 'event.views.mkgroup', name='kickgroup'),
+    url(r'^addorgadmin/$', 'event.views.addorgadmin', name='addadmin'),
+    url(r'^rmorgadmin/$', 'event.views.rmorgadmin', name='rmadmin'),
     
     url(r'^mkcomment/$', 'event.views.mkcomment', name='mkcomment'),
     url(r'^comments/$', 'event.views.comments', name='mkcomment'),

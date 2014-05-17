@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.db import models
 from django.forms.models import model_to_dict
@@ -11,7 +11,7 @@ from django.contrib.auth import logout
 
 from dateutil import parser
 
-from models import Event,Location,Task,Profile,Frontline, Organization,Comment
+from models import Event,Location,Task,Profile,Frontline, Organization,Comment,Interest
 
 from django.template import RequestContext, loader
 import reversion
@@ -20,8 +20,13 @@ import reversion
 import magic  #wtf python
 
 
-# Create your views here.
 
+
+# takeinterest 
+# dropinterest 
+#  
+# search/ by interest 
+#  
 
 
 def isadmin(user,e):
@@ -122,6 +127,11 @@ def search(request):
 
     if 'eventid' in request.GET:
         q=q.filter(id=int(request.GET['eventid']) )
+
+    if 'interest' in request.GET:
+        q=q.filter(interests__group__name=request.GET['interest'])
+
+
 
     if 'latDist' in request.GET:
         latDist=float(request.GET['latDist'])
@@ -267,7 +277,7 @@ def rmcomment(request):
 
 
 
-
+@csrf_exempt
 def rsvpme(request):
     data=dict()
     cdata=dict()
@@ -284,7 +294,7 @@ def rsvpme(request):
         data["success"]=False
         return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
-
+@csrf_exempt
 def unrsvpme(request):
     data=dict()
 
@@ -544,13 +554,22 @@ class UploadFileForm(forms.Form):
 @csrf_exempt
 def eventimage(request):
     data=dict()
-    e=Event.objects
-    e=e.get(id__exact=int(request.POST['eventid'])) 
-    form = UploadFileForm(request.POST, request.FILES)
-    e.image=request.FILES['eventimage']
-    e.save()        
+    if "eventid" in request.POST:
+        e=Event.objects
+        e=e.get(id__exact=int(request.POST['eventid'])) 
+        form = UploadFileForm(request.POST, request.FILES)
+        e.image=request.FILES['image']
+        e.save()        
+    if "orgid" in request.POST:
+        e=Organization.objects
+        e=e.get(id__exact=int(request.POST['orgid'])) 
+        form = UploadFileForm(request.POST, request.FILES)
+        e.image=request.FILES['image']
+        e.save()        
+    
     data["success"]=True
     return HttpResponse(json.dumps(data),content_type="application/json")
+
 
 
 
@@ -559,6 +578,8 @@ def eventimage(request):
 def geteventimage(request):
     if "eventid" in request.GET:
         e=get_object_or_404(Event,id__exact=int(request.GET['eventid']))
+        if not e.image:
+            raise Http404
         if "thumbnail" in request.GET:
             file=e.image_thumbnail
         else:
@@ -635,19 +656,61 @@ def mktask(request):
 @csrf_exempt
 def mkgroup(request):
     user = request.user
-    newgroup,created=Group.objects.get_or_create(name=request.GET['name'])
-    newcat=Organization()
-    newcat.group=newgroup
-    
+    newgroup,created=Group.objects.get_or_create(name=request.POST['name'])
+    neworg=Organization()
+    neworg.group=newgroup
     newgroup.save()
     for field in request.POST:
-        setattr(newgroup,field, request.POST[field])
-
+        setattr(neworg,field, request.POST[field])
     newgroup.user_set.add(user)
-    
+
+    neworg.creator=request.user
+    neworg.save()
+    neworg.Admins.add(user)
     newgroup.save()
-    newcat.save()
-    return HttpResponse('{"success": true, "gid": ' + str(newcat.id) + '}',content_type="application/json")
+    neworg.save()
+
+    return HttpResponse('{"success": true, "orgid": ' + str(neworg.id) + '}',content_type="application/json")
+
+
+
+@csrf_exempt
+def mki(request):
+    data=dict()
+    interestlist=["Accessibility",
+"Animals",
+"Arts",
+"Discrimination",
+"Economy",
+"Education",
+"Environment",
+"Faith",
+"Women's Rights",
+"Government",
+"Health",
+"Human Rights",
+"Immigration",
+"Labor",
+"LGBTQIA",
+"Mental Health",
+"Prison System",
+"Race",
+"Technology",
+"Transportation",
+"Youth"]
+
+    for intname in interestlist:
+        newgroup,created=Group.objects.get_or_create(name=intname)
+        newgroup.save()
+
+        newint,created=Interest.objects.get_or_create(group=newgroup,creator=request.user)
+        newint.group=newgroup
+
+        newint.save()
+        newgroup.save()
+        data[intname]=intname
+    data["success"]=True
+    return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
 
 
 
@@ -700,6 +763,34 @@ def kickuserfromgroup(request):
 
 
 
+@csrf_exempt
+def addorgadmin(request):
+    data=dict()
+    data["success"]=True
+    if request.user.is_authenticated():
+        o=get_object_or_404(Organization,id__exact=int(request.GET['orgid']))
+        if request.user.is_authenticated() and request.user in o.Admins.all() or request.user==o.creator:
+            o.Admins.add(request.user)
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+@csrf_exempt
+def rmorgadmin(request):
+    data=dict()
+    data["success"]=True
+    o=get_object_or_404(Organization,id__exact=int(request.GET['orgid']))
+
+    if request.user.is_authenticated() and request.user in o.Admins.all() or request.user==o.creator:
+        u=get_object_or_40(User,id__exact=int(request.GET['uid']))
+        o.group.user_set.remove(u)
+
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+
+
+
+
 
 @csrf_exempt
 def LookUpUid(request):
@@ -727,7 +818,6 @@ def LookUpUserName(request):
     data["success"]=True
     data["uid"]=user.id
     return HttpResponse(json.dumps(data),content_type="application/json")
-
 
 
 

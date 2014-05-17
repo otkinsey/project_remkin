@@ -40,9 +40,6 @@ class Usercategory(models.Model):
         return self.group.name
 
 
-
-
-
 class Organization(Usercategory):
     orgAddress=models.CharField(max_length=500, blank=True,null=True)
     orgLocationDescription = models.CharField(max_length=500, blank=True,null=True)
@@ -50,6 +47,10 @@ class Organization(Usercategory):
     latitude = models.FloatField(blank=True,null=True)
     Admins= models.ManyToManyField(User,related_name="OrgAdmin", blank=True)
     creator = models.ForeignKey(User)
+
+class Interest(Usercategory):
+    creator = models.ForeignKey(User)
+    hashtag = models.CharField(max_length=500)
 
 
 class Location(models.Model):
@@ -127,6 +128,9 @@ class Event(models.Model):
     EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist", blank=True)
     EventCheckins = models.ManyToManyField(User,related_name="eventCheckins", blank=True)
     tasklist = models.ManyToManyField(Task)
+
+    interests = models.ForeignKey(Interest,related_name="eventlinks",blank=True,null=True)
+
     def to_dict(self):
         return model_to_dict(self)
     def __str__(self):
@@ -150,25 +154,25 @@ class Comment(models.Model):
 #class EventAdmin Admin(admin.ModelAdmin):
 #    list_display = ('eventName', 'eventAddress', 'creator')
 
+admin.site.register(Frontline)
 
 admin.site.register(Event)
+patch_admin(Event)
 
 admin.site.register(Task)
-admin.site.register(Frontline)
-admin.site.register(Organization)
-admin.site.register(Usercategory)
+patch_admin(Task)
 
+admin.site.register(Organization)
+patch_admin(Organization)
+
+admin.site.register(Usercategory)
+patch_admin(Usercategory)
 
 admin.site.register(Profile)
-
-patch_admin(Event)
-patch_admin(Task)
+patch_admin(Profile)
 
 admin.site.register(Comment)
 patch_admin(Comment)
 
-patch_admin(Profile)
-
-patch_admin(Usercategory)
-patch_admin(Organization)
-
+admin.site.register(Interest)
+patch_admin(Interest)
