@@ -137,19 +137,12 @@ box-shadow:0 0 20px 1px #b19d5f  inset;
 margin:0em 0em 1em 1em;
 }
 
-<<<<<<< HEAD
-body {
-    font-size: 1em;
-    line-height: 1.4;
-    overflow-x:hidden;
-    background:url("../img/bkgd_b.jpg");
-    background-repeat:none;
-=======
+
 .submit:hover{
 background:#fb8964;
 border:1px solid #ffffff;
 box-shadow:0 0 0px 0px #bbbbbb;
->>>>>>> test files-do not add to server
+
 }
 
 #create_submit{
@@ -848,18 +841,12 @@ a{
     //border-bottom:#F58252 2px solid;
 }
 
-<<<<<<< HEAD
-body {
-    font-size: 1em;
-    line-height: 1.4;
-    overflow-x:hidden;
-    background:url("../img/bkgd_b.jpg" );
-=======
+
 #header_logo{
 	width:90%;
 	margin:;
 	max-width:390px;
->>>>>>> test files-do not add to server
+
 }
 
 .header_element{
@@ -2361,24 +2348,6 @@ left:3%;
 	}
 }
 
-<<<<<<< HEAD
-    @page {
-        margin: 0.5cm;
-    }
 
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-        font-weight:100;
-    }
+}
 
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
-}
-=======
-}
->>>>>>> test files-do not add to server
