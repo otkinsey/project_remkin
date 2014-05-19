@@ -1,41 +1,100 @@
-{%include "includes/head.html"%}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
 
-<div class= "slider">
-	<div class ="icon_large">
-		<img src= "img/hpi_1.png">
-		<span class="icon_text">
-			<h3>Get Things Done Together</h3>
-			Accomplishing tasks is easier than ever
-			before. Collaborate easily with your internal
-			teams, partners and volunteers.
-		</span>
-	</div>
-	<div class ="icon_large">
-		<img src= "img/hpi_2.png">
-		<span class="icon_text">
-			<h3>Remind people automatically</h3>
-				No running after volunteers anymore! Keep them updated on tasks and deadlines with automatic alerts.
-		</span>				
-	</div>
-	<div class ="icon_large">
-		<img src= "img/hpi_3.png">
-		<span class="icon_text">
-			<h3>Connect with the community</h3>
-			Increase active community involvement
-			in your projects, grow your network
-			and make your events successful!
-		</span>	
-	</div>
-</div>	
-<div class= "icon_text" id= "input_title"><h3>Want to be a beta tester?</h3></div>
-<div class= "bottom_div">
-	<form method= "post" action= "frontline/" id= "form_1">
-		<input type= "text" name= "email" class= "inline_item" placeholder= "enter your email." id= "ei_1"><br>
-		<textarea name= "Comments" cols="40" rows="5" placeholder= "how do you plan to use handstack?" id= "comments"></textarea>
-		<button type= "" name= "request" value= "beta_tester" class= "button" id= "eb_1">sign me up!</button> 
-	</form>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta name= "viewport" content= "width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>welcome to handstack</title>
+		<meta name="author" content="remkin" />
+		<!-- Date: 2014-02-25 -->
+		<link href= "/css/main.css" rel= "stylesheet" type= "text/css">
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<link href= "/css/normalize.css" rel= "stylesheet" type= "text/css">
+		<link href= "/css/normalize.min.css" rel= "stylesheet" type= "text/css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script src="/js/vendor/1.10.1.min.js"></script>
+  		<script src="/js/main.js"></script>
+  	<script>
+  		$(document).ready(function(){
+  			$(".team_member").click(function(){
+  				var name = $(this)
+	  			$.get("about.html", function(data){
+ 	 				$(".main-container").html(data);
+  				}); 				
+  			});
+  		});
+
+  		$(document).ready(function(){
+  			$("#team").click(function(){
+	  			$.get("team.html", function(data){
+ 	 				$(".main-container").html(data);
+  				}); 				
+  			});
+  		});
+
+  		$(document).ready(function(){
+  			$("#about").click(function(){
+	  			$.get("about.html", function(data){
+ 	 				$(".main-container").html(data);
+  				}); 				
+  			});
+  		});
+  		
+  		$(document).ready(function(){
+  			$("#nav_pic-1").hover(function(){
+  				$("#nav_pic-1").attr("src", "/img/hi_1-hl.png");
+  			}).mouseleave(function(){
+  				$("#nav_pic-1").attr("src", "/img/hi_1.png");
+  			});
+  		});
+  		
+  		$(document).ready(function(){
+  			$("#nav_pic-2").hover(function(){
+  				$("#nav_pic-2").attr("src", "/img/hi_2-hl.png");
+  			}).mouseleave(function(){
+  				$("#nav_pic-2").attr("src", "/img/hi_2.png");
+  			});
+  		});
+  		
+  		$(document).ready(function(){
+  			$("#nav_pic-3").hover(function(){
+  				$("#nav_pic-3").attr("src", "/img/hi_3-hl.png");
+  			}).mouseleave(function(){
+  				$("#nav_pic-3").attr("src", "/img/hi_3.png");
+  			});
+  		});  		
+  	</script>	
+	</head>
+	<body>
+<div>
+	<img src= "">
 </div>
+<div  class= "members">
+		<button class= "button inline_item" id= "login">login</button>
+		<button class= "button inline_item" id= "signup">sign up</button>
+</div>
+<div class= "slider">
 
+	<form action= "content.html" method= "post" class= "splash_search">
+		{% csrf_token } {%csrf_protect%}
+		<select  id= "category" class= "inline_item">
+			<option class= "default" selected= "selected">I'm looking for...</option>
+			<option>category</option>
+			<option>category</option>
+			<option>category</option>
+		</select>
+		<select id= "location" class= "inline_item">
+			<option class= "default" selected= "selected">located here...</option>
+			<option>category</option>
+			<option>category</option>
+			<option>category</option>							
+		</select>
+		<button class= "inline_item search" id= "search_button"><img src= "img/search.png"></button>			
+
+	</form>
+
+</div>	
 		</div><!----end of "main-container"------> 
 	        	
 	</body>

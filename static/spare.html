@@ -1,0 +1,392 @@
+<!--before ends-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta name= "viewport" content= "width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>welcome to handstack</title>
+		<meta name="author" content="remkin" />
+		<!-- Date: 2014-02-25 -->
+		<link href= "/css/main.css" rel= "stylesheet" type= "text/css">
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<link href= "/css/normalize.css" rel= "stylesheet" type= "text/css">
+		<link href= "/css/normalize.min.css" rel= "stylesheet" type= "text/css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script src="/js/vendor/1.10.1.min.js"></script>
+  		<script src="/js/main.js"></script>
+  	<script>
+  	/**********F5 supress and output create/edit forms******************************/	 	
+  		$(document).ready(function(){
+  			$(document).keydown(function(e){
+  				return (e.which || e.keyCode) != 116;
+  			});	
+		
+  			$(".function").click(function(event){
+  			//event.preventDefault();
+  			
+  				var name =  $(this).attr('id');
+  				var link = name.slice(0);
+  								
+  				alert("link= "+window.location.pathname);
+  				$.get(link+".html", function(data){
+  					$("#create_form").html(data);
+  				});
+  				
+  				if(link+".html"!=window.location){
+  					window.history.pushState({path:link},link,link+".html");
+  				}
+  				return false;
+			});	
+  			
+		});
+  	/************************************************/	 
+  		
+  	/************************************************/
+  		$(document).ready(function(){
+  			
+			$(window).bind('popstate', function() {
+				var url = window.location.pathname;
+
+				if(url!="/create.html"){
+					$.get(window.location.pathname, function(data){
+						$("#create_form").html(data);
+					});					
+				}
+				else{
+					$.get(window.location.pathname, function(data){
+						$(window).html(data);						
+					});					
+				}
+			});  			
+  		});
+	/************************************************/
+ 
+ 	/************************************************/
+ 	$(document).ready(function(){
+ 		
+ 		$('create_submit').click(function(){
+ 			event.preventDefault();
+ 			$.get("success.html", function(data){
+ 				$("#create_form").html(data);
+ 				$("#create_form").html("hello");
+ 			});
+ 		});
+ 	});
+ 	/************************************************/ 		 		
+  	</script>
+
+	</head>
+	<body>
+<!----------------------header begins__-------------------------------------------->
+		<div class= "site_container">
+        <div class="header_container">     	           	
+             		<a href= "/" class= "h_e-1_lrg header_element" id= "header_logo"><img src= "/img/logo2.png" class= "logo"></a>             		            				
+					<form action= "content.html" method= "post" class= "header_search header_element" id= "">
+						{% csrf_token } {%csrf_protect%}
+						<select  id= "category" class= "inline_item">
+							<option class= "default" selected= "selected">I'm looking for...</option>
+							<option>category</option>
+							<option>category</option>
+							<option>category</option>
+						</select>
+						<select id= "location" class= "inline_item">
+							<option class= "default" selected= "selected">located here...</option>
+							<option>category</option>
+							<option>category</option>
+							<option>category</option>							
+						</select>
+
+						<div class= "inline_item" id= "splash_buttons">
+							<button class= "search inline_item" id= "header_search_button"><img src= "img/search.png"></button>
+							<button class= "button inline_item" id= "header_signup">sign up</button>
+							<button class= "button inline_item" id= "header_login">login</button>			
+						</div>
+					</form> 
+	           		      
+        </div><!---header-container----->
+        <div class= "main-container">
+<!----------------------header ends-------------------------------------------->
+<!--before ends-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--after begins-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta name= "viewport" content= "width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>welcome to handstack</title>
+		<meta name="author" content="remkin" />
+		<!-- Date: 2014-02-25 -->
+		<link href= "/css/main.css" rel= "stylesheet" type= "text/css">
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<link href= "/css/normalize.css" rel= "stylesheet" type= "text/css">
+		<link href= "/css/normalize.min.css" rel= "stylesheet" type= "text/css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script src="/js/vendor/1.10.1.min.js"></script>
+  		<script src="/js/main.js"></script>
+  	<script>
+  	/**********F5 supress and output create/edit forms******************************/	 	
+  		$(document).ready(function(){
+  			$(document).keydown(function(e){
+  				return (e.which || e.keyCode) != 116;
+  			});	
+		
+  			$(".function").click(function(event){
+  			//event.preventDefault();
+  			
+  				var name =  $(this).attr('id');
+  				var link = name.slice(0);
+  								
+  				alert("link= "+window.location.pathname);
+  				$.get(link+".html", function(data){
+  					$("#create_form").html(data);
+  				});
+  				$("#function_name").html(name);
+  				if(link+".html"!=window.location){
+  					window.history.pushState({path:link},link,link+".html");
+  				}
+  				return false;
+			});	
+			
+			$("#function_link").click(function(){
+				
+				$.get("#function_name").html(name);
+			}); 			
+		});
+  	/************on document load functions************************************/	 
+ 
+ 			$(document).ready(function(){
+ 				var str= document.location.search;
+ 				var title= str.replace("%20"," ").slice(4);
+ 				
+ 				//alert(str.replace("%20"," ").slice(4));
+ 			
+ 				$("#function_name").html(title);/*add titles to function pages*/
+ 				$(".back").attr("href", "content.html");/*dynamically define back links*/
+ 				$("#submitted_function").html("fart");
+ 			});
+ 
+  		
+  	/*********dyanmic output of task forms***************************************/
+  		$(document).ready(function(){
+  			
+			$(window).bind('popstate', function() {
+				var url = window.location.pathname;
+				
+				if(url!="/create.html"){
+					$.get(window.location.pathname, function(data){
+						$("#create_form").html(data);
+					});					
+				}
+				else{
+					$.get(window.location.pathname, function(data){
+						$(window).html(data);						
+					});					
+				}
+			});  			
+  		});
+	/************************************************/
+ 
+ 	/***********submit button functionality*************************************/
+ 	$(document).ready(function(){
+ 		
+ 		$('#create_submit').click(function(){
+ 			event.preventDefault();
+ 			$.get("success.html", function(data){
+ 				$("#create_form").html(data+ "hello");
+ 				//$("#create_form").html("hello");
+ 			});
+ 		});
+ 	});
+ 	/************************************************/ 		 		
+  	</script>
+
+	</head>
+	<body>
+<!----------------------header begins__-------------------------------------------->
+		<div class= "site_container">
+        <div class="header_container">     	           	
+             		<a href= "/" class= "h_e-1_lrg header_element" id= "header_logo"><img src= "/img/logo2.png" class= "logo"></a>             		            				
+					<form action= "content.html" method= "post" class= "header_search header_element" id= "">
+						{% csrf_token } {%csrf_protect%}
+						<select  id= "category" class= "inline_item">
+							<option class= "default" selected= "selected">I'm looking for...</option>
+							<option>category</option>
+							<option>category</option>
+							<option>category</option>
+						</select>
+						<select id= "location" class= "inline_item">
+							<option class= "default" selected= "selected">located here...</option>
+							<option>category</option>
+							<option>category</option>
+							<option>category</option>							
+						</select>
+
+						<div class= "inline_item" id= "splash_buttons">
+							<button class= "search inline_item" id= "header_search_button"><img src= "img/search.png"></button>
+							<button class= "button inline_item" id= "header_signup">sign up</button>
+							<button class= "button inline_item" id= "header_login">login</button>			
+						</div>
+					</form> 
+	           		      
+        </div><!---header-container----->
+        <div class= "main-container">
+<!----------------------header ends-------------------------------------------->
+<!--after ends-->
+
+
+
+
+<!--create after-->
+{%include 'includes/head.html'%}
+{% csrf_token } {%csrf_protect%}
+
+<!--    eventName= models.CharField(max_length=500)
+    eventStartTime = models.CharField(max_length=500)
+    eventAddress=models.CharField(max_length=500)
+    image=models.FileField(upload_to='events')
+    
+    eventDuration = models.CharField(max_length=500)
+    eventDescription = models.CharField(max_length=5000)
+    eventLocationDescription = models.CharField(max_length=500)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
+    creator = models.ForeignKey(User,related_name="eventCreator")
+    creationTime  = models.DateTimeField(auto_now_add=True)
+    eventComputedStartTime = models.DateTimeField()
+    eventComputedEndTime = models.DateTimeField()
+    EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist", blank=True)
+    tasklist = models.ManyToManyField(Task) -->
+
+<div id= "app_content" class= "cont_1">
+	<div class= "map_cont">
+		<span class= "string_level_1 inline_item" id= "function_name"></span>
+		<div class= "cont_level_2">
+			<div id= "api_nav" class= "inlineblock_item">
+				<ul>
+					<li class= "function" id= "Create Event">create event</li>
+					<li class= "function" id= "Edit Event">edit event</li>
+					<li class= "function" id= "Create Task">create task</li>
+					<li class= "function" id= "Edit Task">edit task</li>
+					<li class= "function" id= "Offer to Help">offer to help</li>
+				</ul>
+			</div>
+			<div  id= "create_form" class= "inlineblock_item">
+				<form action= "create.html" method= "post">
+					{% csrf_token } {%csrf_protect%}	
+					<div class= "string_level_2 inline_item"><span>Title:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Start Time:</span><input id= "description" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Duration:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Location:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Location Description:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Location Image:</span><input id= "eventName" class= "eventfield inline_item"></div>			
+					<div class= "string_level_2 inline_item"><span>Event Description:</span><input id= "eventName" class= "eventfield inline_item"></div>			
+					<a href= "#" class= "back" id= "back_text"><span class= "inline_item " >back to home</span></a>			
+					<a href= "#" class= "back"><img src= "img/point_l.png" class= "inline_item point_nav_min" id= "create_point_a"></a>	
+					<button class= "button inline_item submit" id= "create_submit">submit</button>
+				</form>				
+			</div>	
+		</div>
+	</div>
+</div>
+<!--create before-->
+
+
+
+
+
+
+<!--create after-->
+{%include 'includes/head.html'%}
+{% csrf_token } {%csrf_protect%}
+
+<!--    eventName= models.CharField(max_length=500)
+    eventStartTime = models.CharField(max_length=500)
+    eventAddress=models.CharField(max_length=500)
+    image=models.FileField(upload_to='events')
+    
+    eventDuration = models.CharField(max_length=500)
+    eventDescription = models.CharField(max_length=5000)
+    eventLocationDescription = models.CharField(max_length=500)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
+    creator = models.ForeignKey(User,related_name="eventCreator")
+    creationTime  = models.DateTimeField(auto_now_add=True)
+    eventComputedStartTime = models.DateTimeField()
+    eventComputedEndTime = models.DateTimeField()
+    EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist", blank=True)
+    tasklist = models.ManyToManyField(Task) -->
+
+<div id= "app_content" class= "cont_1">
+	<div class= "map_cont">
+		<span class= "string_level_1 inline_item" id= "function_name"></span>
+		<div class= "cont_level_2">
+			<div id= "api_nav" class= "inlineblock_item">
+				<ul>
+					<li class= "function" id= "Create Event">create event</li>
+					<li class= "function" id= "Edit Event">edit event</li>
+					<li class= "function" id= "Create Task">create task</li>
+					<li class= "function" id= "Edit Task">edit task</li>
+					<li class= "function" id= "Offer to Help">offer to help</li>
+				</ul>
+			</div>
+			<div  id= "create_form" class= "inlineblock_item">
+				<form action= "create.html" method= "post">
+					{% csrf_token } {%csrf_protect%}	
+					<div class= "string_level_2 inline_item"><span>Title:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Start Time:</span><input id= "description" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Duration:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Location:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Location Description:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Location Image:</span><input id= "eventName" class= "eventfield inline_item"></div>			
+					<div class= "string_level_2 inline_item"><span>Event Description:</span><input id= "eventName" class= "eventfield inline_item"></div>			
+					<a href= "#" class= "back" id= "back_text"><span class= "inline_item " >back to home</span></a>			
+					<a href= "#" class= "back"><img src= "img/point_l.png" class= "inline_item point_nav_min" id= "create_point_a"></a>	
+					<button class= "button inline_item submit" id= "create_submit">submit</button>
+				</form>				
+			</div>	
+		</div>
+	</div>
+</div>
+
+<!--create after-->
+
+<div ></div>
+<div class= "string_level_2">
+	<div class= "inlineblock_item">
+		<div class= "task_name">Title:</div>
+		<div><input id= "" class= "taskfield"></div>
+	</div>
+	<div class= "inlineblock_item">
+		<div class= "task_name">Task Description</div>
+		<div><input id= "" class= "taskfield"></div>
+	</div>
+		<div class= "inlineblock_item">
+			<div class= "task_name">Priority:</div>
+			<div><input id= "" class= "taskfield"></div>
+		</div>
+		<div class= "inlineblock_item">
+			<div class= "task_name">Due Date:</div>
+			<div><input id= "" class= "taskfield"></div>
+		</div>
+		<div class= "inlineblock_item delete" >
+			<span>X</span>
+		</div>
+	</div>
