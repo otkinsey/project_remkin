@@ -597,8 +597,7 @@ def eventimage(request):
     data["success"]=True
     return HttpResponse(json.dumps(data),content_type="application/json")
 
-
-
+#import magic  #wtf python
 
 
 @csrf_exempt

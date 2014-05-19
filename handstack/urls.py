@@ -77,5 +77,8 @@ urlpatterns = patterns('',
     url(r'^(?P<path>.*\.html)$', 'event.views.htmlserve', name='htmlserve' ),
     url(r'^(\d+)$', 'event.views.htmlevent',  name='htmlevent'),
 
-    url(r'^(?P<path>.*)$', 'django.views.static.serve',        {'document_root': BASE_DIR+'/static'}),
+
+    url(r'^(?P<path>.*)$', 'django.views.static.serve',        {'document_root': BASE_DIR+'\static'}), #/*okoa*/
+
+
 )

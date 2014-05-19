@@ -26,7 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-TEMPLATE_DIRS= ( BASE_DIR+'/static', )
+TEMPLATE_DIRS= ( BASE_DIR+'\static', )# *okoa*
 
 TEMPLATE_CONTEXT_PROCESSORS =('django.contrib.messages.context_processors.messages','django.contrib.auth.context_processors.auth')
 

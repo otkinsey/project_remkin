@@ -1,0 +1,51 @@
+Profile page:
+	profile pic
+	user's name hand
+	show tasks(you are working on x# tasks, drop down list?)
+	interests
+	I support(organization names, linked to group page)
+	preferences:
+		notifictions- select when they should be notified how far in advanced set multiple(many to many relationship)
+
+Task Signup page:
+	
+	work flow:
+		---events page(*attend, offer to help, share*see event info where when etc., comments,)
+		---offer to help(*button on event page*, see list of event related tasks, select a task)
+		---task page(*volunteer for this event*)
+
+organization's(group) page:
+	org info
+	org logo
+	all events sponsored by org
+	join/unjoin(button)
+
+event details page:
+	event picture
+	name of the event
+	event descrp 
+	date time location
+	name of event creator
+	comments section
+	*join In, offer to help, share(social media and email{event url}),
+
+create event
+	add create task button/option
+
+"only admins can edit events
+
+
+WORK FLOWS:
+----------------------------------------------------------
+
+create a task
+manage/edit task
+view task
+
+create a events
+manage/edit events
+view events
+
+create a groups
+manage/edit groups
+view groups
