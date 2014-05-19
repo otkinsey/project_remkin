@@ -35,6 +35,7 @@ class Usercategory(models.Model):
         grp= model_to_dict(self.group)
         cat= model_to_dict(self)
         cat['group']=grp
+        cat['name']=self.group.name
         return cat
     def __str__(self):
         return self.group.name
@@ -51,6 +52,7 @@ class Organization(Usercategory):
 class Interest(Usercategory):
     creator = models.ForeignKey(User)
     hashtag = models.CharField(max_length=500)
+
 
 
 class Location(models.Model):
@@ -113,7 +115,6 @@ class Event(models.Model):
                                       processors=[ResizeToFill(494, 180)],
                                       format='JPEG',
                                       options={'quality': 90})
-
     eventDuration = models.CharField(max_length=500)
     eventDescription = models.CharField(max_length=5000)
     eventLocationDescription = models.CharField(max_length=500)
@@ -121,15 +122,14 @@ class Event(models.Model):
     latitude = models.FloatField()
     creator = models.ForeignKey(User,related_name="eventCreator")
     lastedit = models.ForeignKey(User,related_name="eventLastedit",blank=True,null=True)
-    Organization = models.ForeignKey(Organization,blank=True,null=True)
+    Organizations = models.ManyToManyField(Organization)
     creationTime  = models.DateTimeField(auto_now_add=True)
     eventComputedStartTime = models.DateTimeField()
     eventComputedEndTime = models.DateTimeField()
     EventRSVPS = models.ManyToManyField(User,related_name="eventrsvplist", blank=True)
     EventCheckins = models.ManyToManyField(User,related_name="eventCheckins", blank=True)
     tasklist = models.ManyToManyField(Task)
-
-    interests = models.ForeignKey(Interest,related_name="eventlinks",blank=True,null=True)
+    interests = models.ManyToManyField(Interest)
 
     def to_dict(self):
         return model_to_dict(self)

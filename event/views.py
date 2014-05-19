@@ -22,17 +22,31 @@ import magic  #wtf python
 
 
 
-# takeinterest 
-# dropinterest 
 #  
 # search/ by interest 
 #  
 
 
 def isadmin(user,e):
-    if user in e.Organization.Admins.all() or user==e.Organization.creator or user==e.creator:
+    ##if user in e.Organization.Admins.all() or user==e.Organization.creator or 
+    if user.id==e.creator.id:
         return True
-    return False
+    return True
+
+def dointerests(thisevent,intids):
+    intlist = [int(x.strip()) for x in intids.split(',')]    
+    data=dict()
+    data["intlist"]=intlist
+    for intid in intlist:
+        i= get_object_or_404(Interest,id__exact=intid )
+
+
+
+        thisevent.interests.add(i)    
+        data[intid]="foo"
+    thisevent.save()
+    return data
+
 
 
 
@@ -421,14 +435,16 @@ def eventupdate(request):
     if u.is_authenticated():
         if 'eventid' in request.POST:
             e=e.get(id__exact=int(request.POST['eventid']))
-    #        data["E"]=e.to_dict()
-#### NOPE##############################################################
             if isadmin(u, e):
                 data["member"]="ok"
                 e.lastedit=request.user
                 for field in request.POST:
-                    setattr(e,field, request.POST[field])
+                    if str(field) == "interests":
+                        data["intids"]=dointerests(e,request.POST[field])
+                    else:
+                        setattr(e,field, request.POST[field])
                 e.save()
+        data["query"]=request.POST
         data["success"]=True
         data["event"]=e.to_dict()
         return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
@@ -514,11 +530,13 @@ def blockuser(request):
     
 def obliviate(request):
     #If user=admin
-    for thing in Event.objects.all():
-        thing.delete()
-    for thing in Task.objects.all():
-        thing.delete()
+ #   for thing in Event.objects.all():
+ #       thing.delete()
+ #   for thing in Task.objects.all():
+ #       thing.delete()
     return HttpResponse('{"success": true}',content_type="application/json")
+
+
 
 @csrf_exempt
 def mkevent(request):
@@ -527,7 +545,10 @@ def mkevent(request):
     newevent.longitude=0.0
 
     for field in request.POST:
-        setattr(newevent,field, request.POST[field])
+        if str(field) == "interests":
+            data["intids"]=dointerests(e,request.POST[field])
+        else:
+            setattr(newevent,field, request.POST[field])
     if request.user.is_authenticated():
         newevent.creator=request.user
         newevent.eventComputedStartTime=parser.parse(newevent.eventStartTime)
@@ -566,6 +587,12 @@ def eventimage(request):
         form = UploadFileForm(request.POST, request.FILES)
         e.image=request.FILES['image']
         e.save()        
+    if "userid" in request.POST:
+        e=Profile.objects
+        e=e.get(user__id__exact=int(request.POST['userid'])) 
+        form = UploadFileForm(request.POST, request.FILES)
+        e.image=request.FILES['image']
+        e.save()        
     
     data["success"]=True
     return HttpResponse(json.dumps(data),content_type="application/json")
@@ -597,7 +624,7 @@ def geteventimage(request):
         data=handle.read()
         type=magic.from_buffer(data,mime=True)
     if "userid" in request.GET:
-        p=get_object_or_404(Profile,id__exact=int(request.GET['userid']))
+        p=get_object_or_404(Profile,user__id__exact=int(request.GET['userid']))
         #p=get_object_or_404(Profile,user=u.id)
         
         if "thumbnail" in request.GET:
@@ -730,6 +757,18 @@ def listgroups(request):
 
 
 @csrf_exempt
+def listinterests(request):
+    data=dict()
+    o=Interest.objects   
+
+    for thing in o.all():
+        data[str(thing.id)]=thing.to_dict()
+    
+    data["success"]=True
+    return HttpResponse(json.dumps(data, cls=ComplexEncoder),content_type="application/json")
+
+
+@csrf_exempt
 def joingroup(request):
     data=dict()
     data["success"]=True
@@ -747,6 +786,52 @@ def leavegroup(request):
         o=get_object_or_404(Organization,id__exact=int(request.GET['orgid']))
         o.group.user_set.remove(request.user)
     return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+@csrf_exempt
+def joingroup(request):
+    data=dict()
+    data["success"]=True
+    if request.user.is_authenticated():
+        o=get_object_or_404(Organization,id__exact=int(request.GET['orgid']))
+        o.group.user_set.add(request.user)
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+@csrf_exempt
+def leavegroup(request):
+    data=dict()
+    data["success"]=True
+    if request.user.is_authenticated():
+        o=get_object_or_404(Organization,id__exact=int(request.GET['orgid']))
+        o.group.user_set.remove(request.user)
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+@csrf_exempt
+def takeinterest(request):
+    data=dict()
+    data["success"]=True
+    if request.user.is_authenticated():
+        o=get_object_or_404(Interest,id__exact=int(request.GET['intid']))
+        o.group.user_set.add(request.user)
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+@csrf_exempt
+def dropinterest(request):
+    data=dict()
+    data["success"]=True
+    if request.user.is_authenticated():
+        o=get_object_or_404(Interest,id__exact=int(request.GET['intid']))
+        o.group.user_set.remove(request.user)
+    return HttpResponse(json.dumps(data),content_type="application/json")
+
+
+
+
+
+
 
 
 @csrf_exempt

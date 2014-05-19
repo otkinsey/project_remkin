@@ -41,6 +41,10 @@ urlpatterns = patterns('',
 
     url(r'^taskupdate/$', 'event.views.taskupdate', name='taskupdate'),
 
+    url(r'^takeinterest/$', 'event.views.takeinterest', name='takeinterest'),
+    url(r'^dropinterest/$', 'event.views.dropinterest', name='dropinterest'),
+
+
     url(r'^mkgroup/$', 'event.views.mkgroup', name='mkgroup'),
     url(r'^listgroups/$', 'event.views.listgroups', name='listgroups'),
     url(r'^joingroup/$', 'event.views.mkgroup', name='joingroup'),
@@ -58,6 +62,7 @@ urlpatterns = patterns('',
 
     url(r'^lookupuser/$', 'event.views.LookUpUserName', name='luun'),
 
+    url(r'^listinterests/$', 'event.views.listinterests', name='listinterests'),
 
     url(r'^eventimage/$', 'event.views.eventimage', name='eventimage'),
     url(r'^image/$', 'event.views.eventimage', name='eventimage'),
