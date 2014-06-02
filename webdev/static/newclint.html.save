@@ -1,0 +1,80 @@
+<style>
+
+div{
+padding:5px;
+border:1px solid black;}
+
+div div{
+padding:5px;
+border:1px solid blue;}
+
+div div{
+padding:3px;
+border:1px solid green;}
+
+
+
+
+
+
+
+
+
+
+</style>
+<div id="e-23" class="event">
+<img class="eventimage" />
+        <div class="eltitle"></div>
+        <div class="eldist"></div>
+        <div class="eldesc"></div>
+        <div class="elday"></div>
+        <div class="eldate"></div>
+        <div class="eltime"></div>
+        <div class="eldate"></div>
+            <img class="elimage" />
+
+
+<div id="tasklist" class="tasklist tl-eid">
+<div id="tl-tid" class="tasklistitem">
+        <div class="tltitle"></div>
+        <div class="tldist"></div>
+        <div class="tldesc"></div>
+        <div class="tlday"></div>
+        <div class="tldate"></div>
+        <div class="tltime"></div>
+        <div class="tldate"></div>
+</div>
+</div>
+</div>
+<div id="task" class="task">
+        <div class="tasktitle"></div>
+        <div class="taskdist"></div>
+        <div class="taskdesc"></div>
+        <div class="taskday"></div>
+        <div class="taskdate"></div>
+        <div class="tasktime"></div>
+        <div class="taskdate"></div>
+</div>
+
+
+<div id="eventlist" class="">
+    <div id="el-23" class="eventlistitem odd">
+        <div class="eltitle"></div>
+        <div class="eldist"></div>
+        <div class="eldesc"></div>
+        <div class="elday"></div>
+        <div class="eldate"></div>
+        <div class="eltime"></div>
+        <div class="eldate"></div>
+        <div class="eltasks"></div>
+            <img class="elimage" />
+        
+    </div>
+</div>
+
+<div id="mapcontainer" class=""></div>
+<div id="myprofile" class="profile">
+<img class="profileimage" />
+<div id="" class="interest" ></div>
+</div>
+<div id="" class=""></div>

@@ -1,0 +1,16 @@
+fixed back link
+tabs aligned with api_cont div
+*******change log 1************************
+
+added mobile menu and associated script
+*******change log 2************************
+
+added links to mobile menu...consider accessing all content via jquery
+*******change log 3************************
+
+stabelized sign-up.html at 320px media transition by adding .8em text
+unclear why this stabelizes the page
+*******change log 4************************
+
+login.html unstable between 500-520px
+*******change log 5************************

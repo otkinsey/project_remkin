@@ -1,0 +1,33 @@
+{%include 'includes/head.html'%}
+<div id= "app_content" class= "cont_1">
+	<div class= "map_cont">
+		<span class= "string_level_1 inline_item" id= "function_name"></span>
+		<div class= "cont_level_2">
+			<div id= "api_nav" class= "inlineblock_item">
+				<ul>
+					<li class= "function" id= "Create_Event">create event</li>
+					<li class= "function" id= "Edit_Event">edit event</li>
+					<!--li class= "function" id= "Create_Task">create task</li-->
+					<li class= "function" id= "Edit_Task">edit task</li>
+					<li class= "function" id= "Offer_to_Help">offer to help</li>
+				</ul>
+			</div>
+			<div  id= "create_form" class= "inlineblock_item">
+				<form action= "create.html" method= "post">
+					{% csrf_token } {%csrf_protect%}	
+					<div class= "string_level_2 inline_item"><span>Title:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Description:</span><input id= "description" class= "eventfield inline_item"></div>
+					<!--div class= "string_level_2 inline_item"><span>Duration:</span><input id= "eventName" class= "eventfield inline_item"></div-->
+					<div class= "string_level_2 inline_item"><span>Start Time:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Duration:</span><input id= "eventName" class= "eventfield inline_item"></div>
+					<div class= "string_level_2 inline_item"><span>Tasks:</span><button class= "button inline_item submit" id= "create_submit">create task</button></div>			
+					<div class= "string_level_2 inline_item"><span>Event Description:</span><input id= "eventName" class= "eventfield inline_item"></div>			
+					<a href= "#" class= "back" id= "back_text"><span class= "inline_item " >back to home</span></a>			
+					<a href= "#" class= "back"><img src= "img/point_l.png" class= "inline_item point_nav_min" id= "create_point_a"></a>	
+					<button class= "button inline_item submit" id= "create_submit">submit</button>
+				</form>				
+			</div>	
+		</div>
+	</div>
+</div>
+

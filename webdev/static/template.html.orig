@@ -1,0 +1,16 @@
+{%include "includes/head.html"%}
+<div class= "slider">
+<title>Thank You</title>
+
+
+
+{{ pageinfo }}
+</div>	
+
+
+
+		</div><!----end of "main-container"------> 
+	        	
+	</body>
+</html>
+

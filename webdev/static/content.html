@@ -1,0 +1,67 @@
+{%include 'includes/head.html'%}
+{% csrf_token } {%csrf_protect%}
+<script>
+	$(document).ready(function(){
+		$('.mobile_menu_title').click(function(){
+			$('.level_2').toggle(500);
+			$('.mobile_menu_title').toggle();
+		});			
+	});
+</script>
+<div id= "map_api" class= "cont_1">
+	<div class= "map_cont"></div>
+	<div class= "tabs">
+		<ul>
+			<li class= "tab"><span>past events</span></li>
+			<li class= "tab"><span>upcoming events</span></li>
+			<li class= "tab"><span>my events</span></li>
+		</ul>		
+	</div>
+
+</div>
+<div class= "api_cont">
+	<div class= "" id= "mobile_menu">
+		<ul class= "level_1">
+			<li class= "has_sub">
+				<div class= "inlineblock_item mobile_menu_title">menu</div>
+				<div class= "inlineblock_item mobile_menu_title" style= "display:none;">close</div>
+				<!--div class= "close inlineblock_item">x</div-->
+				<ul class= "level_2">
+					<li><div>create event</div></li>
+					<li><div>edit event</div></li>
+					<li><div>create group</div></li>
+					<li><div>edit group</div></li>
+					<li><div>join group</div></li>
+				</ul>	
+			</li>			
+		</ul>
+	</div>
+	<div id= "api_nav" class= "inlineblock_item">
+		<ul>
+			<a href= "Create_Event.html"><li class= "function_link" id= "Create Event">create event</li></a>
+			<a href= "Edit_Event.html"><li class= "function_link" id= "Edit Event">edit event</li></a>
+			<a href= "Create_Group.html"><li class= "function_link" id= "Offer to Help">create group</li></a>
+			<a href= "Edit_Group.html"><li class= "function_link" id= "Offer to Help">edit group</li></a>
+			<a href= "Join_Group.html"><li class= "function_link" id= "Offer to Help">join group</li></a>
+		</ul>
+	</div>
+	<div id= "api_content" class= "inlineblock_item">
+		<div class= "api_itme">
+			<div class= "event_obj">
+				<div class= "inlineblock_item" id= "obj_a"></div>
+				<div class= "inlineblock_item" id= "obj_b"></div>
+				<div class= "inlineblock_item" id= "obj_c"></div>
+			</div>
+			<div class= "event_obj">
+				<div class= "inlineblock_item" id= "obj_a"></div>
+				<div class= "inlineblock_item" id= "obj_b"></div>
+				<div class= "inlineblock_item" id= "obj_c"></div>
+			</div>
+			<div class= "event_obj">
+				<div class= "inlineblock_item" id= "obj_a"></div>
+				<div class= "inlineblock_item" id= "obj_b"></div>
+				<div class= "inlineblock_item" id= "obj_c"></div>
+			</div>			
+		</div>
+	</div>		
+</div>

@@ -1,0 +1,99 @@
+/************content.html mobile menu****************/
+#mobile_menu ul,
+#mobile_menu li,
+#mobile_menu span,
+#mobile_menu a{
+	margin: 0;
+	padding: 0em;	
+ 	position: relative;
+  	top:.02em;
+}
+
+#mobile_menu .close{
+	position:relative;
+	right:44%;
+	background:#7A7454;
+	border-radius:;
+	border-left:1px solid #47422E;
+	padding:0 .4em .2em 1em;
+	color:#AFA475;
+	float:right;
+	vertical-align:top;
+	font-weight:bold;
+	height:19px;
+}
+
+#mobile_menu:after,
+#mobile_menu ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+#mobile_menu .has_sub{
+	z-index:1;
+}
+
+#mobile_menu{
+	background:#FFFFFF;
+	display:inherit;
+	color:#FB8964;
+	font-size:.8em;
+	padding:.3em 0 .5em .3em;
+}
+
+#mobile_menu ul, #mobile_menu li{
+  list-style:none;
+}
+
+#mobile_menu .has_sub ul {
+	display:none;
+	position:absolute;
+	top:1.6em;
+	left:-3px;
+	color:#FB8964;
+	background: #fff;
+	padding:0em;
+	width:15em;;
+}
+
+#mobile_menu .has_sub li{
+	padding:1em 0 1em 0;
+	border-bottom:1px dotted #ccc;
+	width:100%;
+	min-width:190px;
+}
+
+#mobile_menu .has_sub ul li:first-child{	
+	padding:.2em 0 1em 0;
+}
+
+#mobile_menu .has_sub li:hover{
+	background: #FB8964;
+	padding:1em 0 1em 0;
+	color:#fff;
+	border-bottom:1px dotted #fff;
+	width:100%;
+}
+
+
+#mobile_menu .level_2 div{
+	margin:0 0 1em 3em;
+}
+
+/*#mobile_menu > ul > li:hover:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #0fa1e0;
+  margin-left: -10px;
+  color:#FFFFFF;
+}*triangle at the bottom of container element/
+
+/***************************************************/
