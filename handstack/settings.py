@@ -26,7 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-TEMPLATE_DIRS= ( BASE_DIR+'\static', )# *okoa*
+TEMPLATE_DIRS= ( BASE_DIR+'/static', )
 
 TEMPLATE_CONTEXT_PROCESSORS =('django.contrib.messages.context_processors.messages','django.contrib.auth.context_processors.auth')
 
@@ -41,9 +41,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'event',
     'imagekit',
-    'south',
-    'django_extensions',
-    'reversion',
 )
 
 MIDDLEWARE_CLASSES = (
